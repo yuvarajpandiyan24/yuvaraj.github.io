@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experience — Yuvaraj Pandian</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════
+   ROOT & RESET
+════════════════════════════════ */
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a26;
+  --accent1: #c8ff00;
+  --accent2: #ff3b6e;
+  --accent3: #00d4ff;
+  --text: #e8e8f0;
+  --text-dim: #7a7a99;
+  --border: rgba(255,255,255,0.07);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;overflow-x:hidden;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'DM Mono',monospace;font-size:14px;line-height:1.6;cursor:none;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.022;pointer-events:none;z-index:9997;
+}
+
+/* ════════════════════════════════
+   CUSTOM CURSOR
+════════════════════════════════ */
+.cursor,.cursor-ring{position:fixed;pointer-events:none;border-radius:50%;z-index:9999;display:none;}
+@media(hover:hover){
+  .cursor{display:block;width:10px;height:10px;background:var(--accent1);mix-blend-mode:difference;transition:transform .15s ease;}
+  .cursor-ring{display:block;width:36px;height:36px;border:1.5px solid var(--accent1);z-index:9998;mix-blend-mode:difference;transition:left .1s ease,top .1s ease,transform .3s ease;}
+  body,a,button{cursor:none;}
+}
+
+/* ════════════════════════════════
+   NAV
+════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 3rem;
+  background:rgba(10,10,15,.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:-.02em;color:var(--text);text-decoration:none;flex-shrink:0;}
+.nav-logo span{color:var(--accent1);}
+.nav-links{display:flex;gap:0;list-style:none;}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.45rem .9rem;position:relative;transition:color .2s;}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:.9rem;right:.9rem;height:1px;background:var(--accent1);transform:scaleX(0);transition:transform .3s ease;}
+.nav-links a:hover,.nav-links a.active{color:var(--text);}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-status{display:flex;align-items:center;gap:.5rem;font-size:.68rem;color:var(--text-dim);flex-shrink:0;}
+.status-dot{width:6px;height:6px;background:var(--accent1);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:290;background:rgba(10,10,15,.98);backdrop-filter:blur(20px);flex-direction:column;align-items:center;justify-content:center;gap:.5rem;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(1.8rem,8vw,2.5rem);color:var(--text-dim);text-decoration:none;text-transform:uppercase;padding:.4rem 1rem;transition:color .2s;}
+.mobile-menu a:hover{color:var(--accent1);}
+.mobile-menu-footer{position:absolute;bottom:2rem;font-size:.65rem;color:var(--text-dim);letter-spacing:.15em;}
+
+/* ════════════════════════════════
+   HERO
+════════════════════════════════ */
+.exp-hero{
+  padding:160px 3rem 80px;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid var(--border);
+}
+.hero-grid-bg{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse at 80% 50%,black 20%,transparent 70%);
+}
+/* Decorative timeline-line bg element */
+.hero-timeline-deco{
+  position:absolute;right:8%;top:0;bottom:0;width:1px;
+  background:linear-gradient(to bottom,transparent,var(--border) 30%,var(--border) 70%,transparent);
+}
+.hero-timeline-dot{
+  position:absolute;right:calc(8% - 5px);
+  width:11px;height:11px;border-radius:50%;
+  background:var(--accent1);
+  box-shadow:0 0 16px var(--accent1);
+  animation:floatdot 4s ease-in-out infinite;
+}
+.hero-timeline-dot:nth-child(2){top:30%;animation-delay:0s;}
+.hero-timeline-dot:nth-child(3){top:55%;background:var(--accent3);box-shadow:0 0 16px var(--accent3);animation-delay:1.5s;}
+.hero-timeline-dot:nth-child(4){top:78%;background:var(--accent2);box-shadow:0 0 16px var(--accent2);animation-delay:3s;}
+@keyframes floatdot{0%,100%{transform:translateX(0);}50%{transform:translateX(-8px);}}
+
+.back-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);text-decoration:none;margin-bottom:2.5rem;transition:color .2s;}
+.back-link:hover{color:var(--accent1);}
+.hero-eyebrow{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent1);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.hero-eyebrow::before{content:'';width:36px;height:1px;background:var(--accent1);}
+.hero-title{font-family:'Fraunces',serif;font-size:clamp(3rem,8vw,7.5rem);font-weight:700;line-height:.9;letter-spacing:-.03em;margin-bottom:1.5rem;}
+.hero-title .italic{font-style:italic;font-weight:300;color:var(--text-dim);}
+.hero-title .dot{color:var(--accent1);}
+.hero-desc{max-width:480px;color:var(--text-dim);font-size:.83rem;line-height:1.85;margin-bottom:2.5rem;}
+
+/* Quick stats strip */
+.exp-stats{display:flex;gap:2px;}
+.exp-stat{padding:1rem 1.5rem;border:1px solid var(--border);background:var(--surface);}
+.exp-stat-num{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;line-height:1;}
+.exp-stat-num.c1{color:var(--accent1);}
+.exp-stat-num.c2{color:var(--accent3);}
+.exp-stat-num.c3{color:var(--accent2);}
+.exp-stat-label{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-top:.3rem;}
+
+/* ════════════════════════════════
+   TAB BAR
+════════════════════════════════ */
+.tab-bar{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:0 3rem;position:sticky;top:65px;z-index:100;
+  display:flex;align-items:center;gap:0;overflow-x:auto;
+}
+.tab-btn{
+  background:none;border:none;padding:1rem 1.25rem;
+  font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text-dim);
+  position:relative;white-space:nowrap;transition:color .2s;
+}
+.tab-btn::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent1);transform:scaleX(0);transition:transform .3s ease;}
+.tab-btn:hover,.tab-btn.active{color:var(--text);}
+.tab-btn.active::after{transform:scaleX(1);}
+.tab-btn.skills-tab::after{background:var(--accent3);}
+.tab-btn.edu-tab::after{background:var(--accent2);}
+
+/* ════════════════════════════════
+   PAGE BODY
+════════════════════════════════ */
+.page-body{padding:3rem;}
+
+/* ── Tab Panels ── */
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* ════════════════════════════════
+   EXPERIENCE TIMELINE
+════════════════════════════════ */
+.timeline-wrap{display:grid;grid-template-columns:220px 1fr;gap:0;}
+
+/* Left year rail */
+.timeline-rail{position:relative;}
+.timeline-rail-inner{
+  position:sticky;top:130px;
+  padding:0 2rem 0 0;
+}
+.timeline-total{
+  background:var(--surface);border:1px solid var(--border);
+  padding:1.5rem;margin-bottom:1.5rem;
+}
+.timeline-total-num{font-family:'Fraunces',serif;font-size:3rem;font-weight:700;line-height:1;color:var(--accent1);}
+.timeline-total-label{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);margin-top:.4rem;}
+
+.discipline-legend{display:flex;flex-direction:column;gap:.5rem;}
+.legend-item{display:flex;align-items:center;gap:.6rem;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.legend-dot.dev{background:var(--accent1);}
+.legend-dot.qa{background:var(--accent2);}
+.legend-dot.con{background:var(--accent3);}
+.legend-dot.edu{background:#a855f7;}
+
+/* Right timeline */
+.timeline-entries{position:relative;padding-left:2.5rem;}
+.timeline-entries::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:1px;background:linear-gradient(to bottom,var(--accent1) 0%,var(--border) 40%,var(--border) 100%);
+}
+
+.exp-entry{position:relative;padding-bottom:3rem;}
+.exp-entry:last-child{padding-bottom:0;}
+
+/* Timeline node */
+.entry-node{
+  position:absolute;left:-2.5rem;
+  width:12px;height:12px;border-radius:50%;
+  border:2px solid var(--bg);margin-left:-6px;
+  top:6px;transition:transform .3s,box-shadow .3s;
+}
+.exp-entry:hover .entry-node{transform:scale(1.5);}
+.entry-node.dev{background:var(--accent1);box-shadow:0 0 10px var(--accent1);}
+.entry-node.qa{background:var(--accent2);box-shadow:0 0 10px var(--accent2);}
+.entry-node.con{background:var(--accent3);box-shadow:0 0 10px var(--accent3);}
+
+/* Connector line from node */
+.entry-connector{
+  position:absolute;left:calc(-2.5rem + 6px);top:17px;bottom:0;
+  width:1px;background:var(--border);
+}
+.exp-entry:last-child .entry-connector{display:none;}
+
+/* Entry card */
+.entry-card{
+  background:var(--surface);border:1px solid var(--border);
+  padding:1.75rem 2rem;position:relative;overflow:hidden;
+  transition:border-color .3s,background .3s;
+}
+.entry-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  transform:scaleX(0);transform-origin:left;transition:transform .4s ease;
+}
+.exp-entry.dev .entry-card::before{background:var(--accent1);}
+.exp-entry.qa .entry-card::before{background:var(--accent2);}
+.exp-entry.con .entry-card::before{background:var(--accent3);}
+.exp-entry:hover .entry-card::before{transform:scaleX(1);}
+.exp-entry.dev:hover .entry-card{border-color:rgba(200,255,0,.3);background:var(--surface2);}
+.exp-entry.qa:hover .entry-card{border-color:rgba(255,59,110,.3);background:var(--surface2);}
+.exp-entry.con:hover .entry-card{border-color:rgba(0,212,255,.3);background:var(--surface2);}
+
+.entry-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;gap:1rem;}
+.entry-date-badge{
+  font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.25rem .65rem;border:1px solid var(--border);
+  color:var(--text-dim);white-space:nowrap;flex-shrink:0;
+}
+.entry-badges{display:flex;gap:.3rem;flex-wrap:wrap;justify-content:flex-end;}
+.entry-badge{
+  font-size:.5rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.18rem .55rem;border-radius:1px;
+}
+.badge-dev{background:rgba(200,255,0,.1);color:var(--accent1);}
+.badge-qa{background:rgba(255,59,110,.1);color:var(--accent2);}
+.badge-con{background:rgba(0,212,255,.1);color:var(--accent3);}
+
+.entry-role{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.2rem;}
+.entry-company{font-size:.78rem;color:var(--text-dim);margin-bottom:.1rem;}
+.entry-type{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.9rem;}
+.entry-desc{font-size:.78rem;color:var(--text-dim);line-height:1.8;margin-bottom:1.1rem;}
+
+.entry-skills{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1.25rem;}
+.entry-skill{
+  font-size:.56rem;letter-spacing:.07em;text-transform:uppercase;
+  padding:.18rem .55rem;background:var(--bg);border:1px solid var(--border);
+  border-radius:2px;color:var(--text-dim);
+}
+
+.entry-footer{display:flex;align-items:center;justify-content:space-between;}
+.entry-highlights{display:flex;gap:1.5rem;}
+.entry-hl{text-align:center;}
+.entry-hl-num{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;}
+.exp-entry.dev .entry-hl-num{color:var(--accent1);}
+.exp-entry.qa .entry-hl-num{color:var(--accent2);}
+.exp-entry.con .entry-hl-num{color:var(--accent3);}
+.entry-hl-label{font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim);}
+
+.entry-cta{
+  background:none;border:1px solid var(--border);
+  padding:.5rem 1rem;font-family:'DM Mono',monospace;
+  font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-dim);transition:all .3s;
+}
+.exp-entry.dev:hover .entry-cta{border-color:var(--accent1);color:var(--accent1);}
+.exp-entry.qa:hover .entry-cta{border-color:var(--accent2);color:var(--accent2);}
+.exp-entry.con:hover .entry-cta{border-color:var(--accent3);color:var(--accent3);}
+
+/* ════════════════════════════════
+   SKILLS TAB
+════════════════════════════════ */
+.skills-body{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+
+.skill-category-card{
+  background:var(--surface);border:1px solid var(--border);
+  padding:1.75rem 2rem;
+}
+.skill-cat-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;}
+.skill-cat-icon{
+  width:36px;height:36px;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;background:var(--surface2);border:1px solid var(--border);
+  flex-shrink:0;
+}
+.skill-cat-name{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;}
+.skill-cat-count{font-size:.6rem;color:var(--text-dim);letter-spacing:.08em;margin-top:.1rem;}
+
+.skill-list{display:flex;flex-direction:column;gap:.65rem;}
+.skill-row{display:flex;flex-direction:column;gap:.3rem;}
+.skill-row-top{display:flex;justify-content:space-between;align-items:baseline;}
+.skill-name{font-size:.72rem;color:var(--text);}
+.skill-pct{font-family:'Fraunces',serif;font-size:.72rem;color:var(--text-dim);}
+.skill-bar-bg{height:2px;background:var(--surface2);border-radius:1px;overflow:hidden;}
+.skill-bar-fill{height:100%;border-radius:1px;width:0%;transition:width 1s ease;}
+.skill-bar-fill.c1{background:var(--accent1);}
+.skill-bar-fill.c2{background:var(--accent2);}
+.skill-bar-fill.c3{background:var(--accent3);}
+.skill-bar-fill.c4{background:#a855f7;}
+
+/* Tool grid */
+.tools-grid{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem;}
+.tool-chip{
+  font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;
+  padding:.25rem .65rem;border:1px solid var(--border);
+  border-radius:2px;color:var(--text-dim);background:var(--bg);
+  transition:all .2s;
+}
+.tool-chip:hover{border-color:rgba(200,255,0,.35);color:var(--accent1);}
+
+/* ════════════════════════════════
+   EDUCATION TAB
+════════════════════════════════ */
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:3rem;}
+
+.edu-card{
+  background:var(--surface);border:1px solid var(--border);
+  padding:2rem;position:relative;overflow:hidden;
+}
+.edu-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent2),transparent);
+}
+.edu-icon-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
+.edu-icon{font-size:1.8rem;}
+.edu-gpa{
+  font-family:'Fraunces',serif;font-size:1.4rem;font-weight:700;
+  color:var(--accent2);text-align:right;line-height:1;
+}
+.edu-gpa-label{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);text-align:right;}
+.edu-degree{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.35rem;line-height:1.3;}
+.edu-school{font-size:.75rem;color:var(--accent3);margin-bottom:.25rem;}
+.edu-period{font-size:.62rem;color:var(--text-dim);letter-spacing:.08em;margin-bottom:.85rem;}
+.edu-desc{font-size:.73rem;color:var(--text-dim);line-height:1.75;}
+
+/* Cert section */
+.cert-section-header{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:1.5rem;padding-bottom:.75rem;
+  border-bottom:1px solid var(--border);
+}
+.cert-section-title{font-family:'Syne',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent1);}
+
+.cert-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.cert-card{
+  background:var(--surface);border:1px solid var(--border);
+  padding:1.5rem;position:relative;overflow:hidden;
+  transition:border-color .3s,background .3s;
+}
+.cert-card:hover{border-color:rgba(200,255,0,.3);background:var(--surface2);}
+.cert-card::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--accent1);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s;
+}
+.cert-card:hover::before{transform:scaleX(1);}
+.cert-num{font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:rgba(200,255,0,.15);line-height:1;margin-bottom:.75rem;}
+.cert-name{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;margin-bottom:.4rem;line-height:1.3;}
+.cert-issuer{font-size:.62rem;color:var(--text-dim);margin-bottom:.3rem;}
+.cert-year{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent1);}
+
+/* ════════════════════════════════
+   ROLE DETAIL OVERLAY
+════════════════════════════════ */
+.role-overlay{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:var(--bg);overflow-y:auto;
+  animation:overlayIn .35s ease;
+}
+.role-overlay.open{display:block;}
+@keyframes overlayIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+
+.read-progress{position:fixed;top:0;left:0;right:0;height:2px;background:var(--border);z-index:600;}
+.read-progress-fill{height:100%;background:var(--accent1);width:0%;transition:width .1s;}
+
+.overlay-nav{
+  position:sticky;top:0;background:rgba(10,10,15,.95);
+  backdrop-filter:blur(20px);border-bottom:1px solid var(--border);
+  padding:1rem 3rem;display:flex;align-items:center;
+  justify-content:space-between;z-index:10;
+}
+.overlay-back{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-dim);background:none;border:none;transition:color .2s;
+}
+.overlay-back:hover{color:var(--accent1);}
+.overlay-nav-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem;text-decoration:none;color:var(--text);}
+.overlay-nav-brand span{color:var(--accent1);}
+
+.role-detail{max-width:900px;margin:0 auto;padding:4rem 3rem 6rem;}
+
+/* Role header */
+.role-header-area{
+  display:grid;grid-template-columns:1fr auto;
+  gap:2rem;align-items:start;margin-bottom:3rem;
+}
+.role-badge-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem;}
+.role-cat-badge{
+  font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.22rem .65rem;border-radius:1px;
+}
+.role-title-large{
+  font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,3rem);
+  font-weight:700;line-height:1.05;letter-spacing:-.02em;margin-bottom:.35rem;
+}
+.role-company-large{font-size:1rem;color:var(--accent3);margin-bottom:.25rem;}
+.role-period-large{font-size:.7rem;color:var(--text-dim);letter-spacing:.08em;margin-bottom:1.25rem;}
+.role-lead{
+  font-size:.88rem;color:var(--text-dim);line-height:1.85;
+  padding:1.25rem;border-left:3px solid var(--accent1);
+  background:var(--surface);
+}
+
+.role-meta-box{
+  background:var(--surface);border:1px solid var(--border);
+  padding:1.5rem;min-width:200px;
+}
+.meta-item{margin-bottom:1.1rem;}
+.meta-item:last-child{margin-bottom:0;}
+.meta-label{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.3rem;}
+.meta-value{font-family:'Syne',sans-serif;font-weight:600;font-size:.82rem;}
+.meta-tags{display:flex;flex-direction:column;gap:.3rem;}
+.meta-tag{font-size:.6rem;letter-spacing:.07em;padding:.22rem .6rem;border:1px solid var(--border);border-radius:2px;color:var(--text-dim);}
+
+/* Role body */
+.role-body{font-size:.84rem;line-height:1.9;color:var(--text-dim);}
+.role-body h2{font-family:'Fraunces',serif;font-size:1.55rem;font-weight:700;color:var(--text);margin:2.5rem 0 .9rem;line-height:1.1;}
+.role-body h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:700;color:var(--text);margin:1.75rem 0 .65rem;letter-spacing:.03em;text-transform:uppercase;}
+.role-body p{margin-bottom:1.1rem;}
+.role-body strong{color:var(--text);font-weight:600;}
+.role-body ul,.role-body ol{padding-left:1.5rem;margin-bottom:1.1rem;}
+.role-body li{margin-bottom:.45rem;}
+.role-body li::marker{color:var(--accent1);}
+.role-body code{background:var(--surface2);border:1px solid var(--border);padding:.15rem .45rem;border-radius:2px;font-size:.78rem;color:var(--accent1);font-family:'DM Mono',monospace;}
+.role-body pre{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent1);padding:1.5rem;margin:1.5rem 0;overflow-x:auto;border-radius:2px;}
+.role-body pre code{background:none;border:none;padding:0;color:var(--text);font-size:.76rem;line-height:1.7;}
+.role-body blockquote{border-left:3px solid var(--accent3);padding:.9rem 1.4rem;margin:1.5rem 0;background:var(--surface);color:var(--text);font-style:italic;}
+
+.highlight-box{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin:2rem 0;}
+.highlight-item{background:var(--surface);padding:1.25rem;border:1px solid var(--border);text-align:center;}
+.highlight-num{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;color:var(--accent1);line-height:1;}
+.highlight-label{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);margin-top:.3rem;}
+
+.callout{background:var(--surface2);border:1px solid var(--border);border-left:3px solid var(--accent2);padding:1rem 1.25rem;margin:1.5rem 0;border-radius:0 2px 2px 0;}
+.callout-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:.35rem;}
+
+.role-footer{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);}
+.role-footer-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:2rem;}
+.role-footer-tag{font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;padding:.25rem .65rem;border:1px solid var(--border);border-radius:2px;color:var(--text-dim);}
+
+/* ════════════════════════════════
+   FOOTER
+════════════════════════════════ */
+footer{background:var(--surface2);border-top:1px solid var(--border);padding:2.5rem 3rem;}
+.footer-inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem;}
+.footer-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;}
+.footer-brand span{color:var(--accent1);}
+.footer-copy{font-size:.62rem;color:var(--text-dim);margin-top:.2rem;}
+.social-links{display:flex;gap:.5rem;justify-content:center;}
+.social-link{width:44px;height:44px;border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--text-dim);transition:all .3s;position:relative;overflow:hidden;}
+.social-link::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s;}
+.social-link.instagram::before{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);}
+.social-link.twitter::before{background:#000;}
+.social-link.linkedin::before{background:#0077b5;}
+.social-link.github::before{background:#333;}
+.social-link:hover::before{opacity:1;}
+.social-link:hover{border-color:transparent;color:white;transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.3);}
+.social-link svg{width:17px;height:17px;position:relative;z-index:1;fill:currentColor;}
+.footer-right{text-align:right;font-size:.62rem;color:var(--text-dim);line-height:1.85;}
+.footer-right a{color:var(--accent1);text-decoration:none;}
+
+/* ════════════════════════════════
+   SCROLL REVEAL
+════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+
+/* ════════════════════════════════
+   RESPONSIVE
+════════════════════════════════ */
+@media(max-width:1100px){
+  .timeline-wrap{grid-template-columns:1fr;}
+  .timeline-rail{display:none;}
+  .skills-body{grid-template-columns:1fr;}
+  .edu-grid{grid-template-columns:1fr;}
+  .cert-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-inner{grid-template-columns:1fr auto;}
+  .footer-right{display:none;}
+}
+@media(max-width:768px){
+  nav,.exp-hero,.tab-bar,.page-body,footer{padding-left:1.1rem;padding-right:1.1rem;}
+  .nav-links,.nav-status{display:none;}
+  .hamburger{display:flex;}
+  .exp-hero{padding-top:120px;padding-bottom:50px;}
+  .hero-title{font-size:clamp(2.5rem,12vw,5rem);}
+  .exp-stats{flex-wrap:wrap;}
+  .timeline-entries{padding-left:1.5rem;}
+  .role-header-area{grid-template-columns:1fr;}
+  .role-meta-box{min-width:unset;}
+  .highlight-box{grid-template-columns:repeat(2,1fr);}
+  .overlay-nav{padding:1rem 1.25rem;}
+  .role-detail{padding:2rem 1.25rem 4rem;}
+  .cert-grid{grid-template-columns:1fr 1fr;}
+  .footer-inner{grid-template-columns:1fr;text-align:center;gap:1.25rem;}
+}
+@media(max-width:480px){
+  .highlight-box{grid-template-columns:1fr;}
+  .cert-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<div class="read-progress"><div class="read-progress-fill" id="progressFill"></div></div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="index.html" class="nav-logo">Yuvaraj<span>.</span>Pandian</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="works.html">Works</a></li>
+    <li><a href="experience.html" class="active">Experience</a></li>
+    <li><a href="index.html#study">Study</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status"><div class="status-dot"></div>Eager to Contribute &amp; Grow</div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="works.html">Works</a>
+  <a href="experience.html">Experience</a>
+  <a href="index.html#study">Study</a>
+  <a href="blog.html">Blog</a>
+  <a href="index.html#contact">Contact</a>
+  <div class="mobile-menu-footer">Eager to Contribute &amp; Grow ●</div>
+</div>
+
+<!-- ══ HERO ══ -->
+<div class="exp-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-timeline-deco"></div>
+  <div class="hero-timeline-dot"></div>
+  <div class="hero-timeline-dot"></div>
+  <div class="hero-timeline-dot"></div>
+
+  <a href="index.html" class="back-link reveal">← Back to Portfolio</a>
+  <div class="hero-eyebrow reveal">Career Journey</div>
+  <h1 class="hero-title reveal">
+    <div>Work</div>
+    <div class="italic">Experience<span class="dot">.</span></div>
+  </h1>
+  <p class="hero-desc reveal reveal-delay-1">
+    Two roles. Three disciplines. A career built at the intersection of engineering, quality, and communication — each position adding a new layer to the stack.
+  </p>
+  <div class="exp-stats reveal reveal-delay-2">
+    <div class="exp-stat">
+      <div class="exp-stat-num c1">6+</div>
+      <div class="exp-stat-label">Months Total</div>
+    </div>
+    <div class="exp-stat">
+      <div class="exp-stat-num c2">2</div>
+      <div class="exp-stat-label">Companies</div>
+    </div>
+    <div class="exp-stat">
+      <div class="exp-stat-num c3">3</div>
+      <div class="exp-stat-label">Disciplines</div>
+    </div>
+    <div class="exp-stat">
+      <div class="exp-stat-num c1">40+</div>
+      <div class="exp-stat-label">Test Cases Written</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB BAR ══ -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="timeline">Timeline</button>
+  <button class="tab-btn skills-tab" data-tab="skills">Skills &amp; Tools</button>
+  <button class="tab-btn edu-tab" data-tab="education">Education &amp; Certs</button>
+</div>
+
+<!-- ══ PAGE BODY ══ -->
+<div class="page-body">
+
+  <!-- ──────────────────────────
+       TIMELINE PANEL
+  ────────────────────────────── -->
+  <div class="tab-panel active" id="panel-timeline">
+    <div class="timeline-wrap">
+
+      <!-- Left rail -->
+      <div class="timeline-rail">
+        <div class="timeline-rail-inner">
+          <div class="timeline-total reveal">
+            <div class="timeline-total-num">6+</div>
+            <div class="timeline-total-label">Months of Professional Experience</div>
+          </div>
+          <div class="discipline-legend reveal reveal-delay-1">
+            <div class="legend-item"><div class="legend-dot dev"></div>Software Engineering</div>
+            <div class="legend-item"><div class="legend-dot qa"></div>QA / Testing</div>
+            <div class="legend-item"><div class="legend-dot con"></div>Content Creation</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right entries -->
+      <div class="timeline-entries">
+
+        <!-- ── Entry 1: Tradesala ── -->
+        <div class="exp-entry dev" data-role="role-tradesala">
+          <div class="entry-node dev"></div>
+          <div class="entry-connector"></div>
+          <div class="entry-card reveal">
+            <div class="entry-top">
+              <div class="entry-date-badge">2026 — Present</div>
+              <div class="entry-badges">
+                <span class="entry-badge badge-dev">Engineering</span>
+                <span class="entry-badge badge-qa">QA Testing</span>
+                <span class="entry-badge badge-con">Content</span>
+              </div>
+            </div>
+            <div class="entry-role">Associate Trainee</div>
+            <div class="entry-company">Tradesala Technologies</div>
+            <div class="entry-type">Full-time · Chennai, Tamil Nadu · On-site</div>
+            <p class="entry-desc">
+              A triple-discipline role at a fast-growing eCommerce startup. Building Java-based backend features, owning the automation testing suite for the main platform, and writing conversion-focused product content — all simultaneously.
+            </p>
+            <div class="entry-skills">
+              <span class="entry-skill">Java</span>
+              <span class="entry-skill">Angular</span>
+              <span class="entry-skill">PHP</span>
+              <span class="entry-skill">Selenium</span>
+              <span class="entry-skill">TestNG</span>
+              <span class="entry-skill">Content Writing</span>
+              <span class="entry-skill">SEO</span>
+            </div>
+            <div class="entry-footer">
+              <div class="entry-highlights">
+                <div class="entry-hl">
+                  <div class="entry-hl-num">40+</div>
+                  <div class="entry-hl-label">Test Cases</div>
+                </div>
+                <div class="entry-hl">
+                  <div class="entry-hl-num">300+</div>
+                  <div class="entry-hl-label">Descriptions</div>
+                </div>
+                <div class="entry-hl">
+                  <div class="entry-hl-num">3</div>
+                  <div class="entry-hl-label">Disciplines</div>
+                </div>
+              </div>
+              <button class="entry-cta" data-role="role-tradesala">View Details →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Entry 2: Shiash ── -->
+        <div class="exp-entry dev" data-role="role-shiash">
+          <div class="entry-node dev"></div>
+          <div class="entry-connector"></div>
+          <div class="entry-card reveal reveal-delay-1">
+            <div class="entry-top">
+              <div class="entry-date-badge">2023 — 2023</div>
+              <div class="entry-badges">
+                <span class="entry-badge badge-dev">Engineering</span>
+              </div>
+            </div>
+            <div class="entry-role">Java Software Developer</div>
+            <div class="entry-company">Shiash Info Solutions</div>
+            <div class="entry-type">Internship · Chennai, Tamil Nadu · On-site</div>
+            <p class="entry-desc">
+              Built and maintained scalable Java backend systems including RESTful APIs and database-driven applications. Gained hands-on experience with real production codebases and enterprise-grade architecture patterns.
+            </p>
+            <div class="entry-skills">
+              <span class="entry-skill">Java</span>
+              <span class="entry-skill">J2EE</span>
+              <span class="entry-skill">JavaScript</span>
+              <span class="entry-skill">MySQL</span>
+              <span class="entry-skill">HTML &amp; CSS</span>
+              <span class="entry-skill">REST APIs</span>
+            </div>
+            <div class="entry-footer">
+              <div class="entry-highlights">
+                <div class="entry-hl">
+                  <div class="entry-hl-num">REST</div>
+                  <div class="entry-hl-label">API Design</div>
+                </div>
+                <div class="entry-hl">
+                  <div class="entry-hl-num">MVC</div>
+                  <div class="entry-hl-label">Architecture</div>
+                </div>
+                <div class="entry-hl">
+                  <div class="entry-hl-num">1</div>
+                  <div class="entry-hl-label">Certificate</div>
+                </div>
+              </div>
+              <button class="entry-cta" data-role="role-shiash">View Details →</button>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /timeline-entries -->
+    </div><!-- /timeline-wrap -->
+  </div><!-- /panel-timeline -->
+
+  <!-- ──────────────────────────
+       SKILLS PANEL
+  ────────────────────────────── -->
+  <div class="tab-panel" id="panel-skills">
+    <div class="skills-body">
+
+      <!-- Engineering -->
+      <div class="skill-category-card reveal">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon">⚙️</div>
+          <div>
+            <div class="skill-cat-name">Software Engineering</div>
+            <div class="skill-cat-count">5 Core Skills</div>
+          </div>
+        </div>
+        <div class="skill-list">
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">Java (Core + J2EE)</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c1" data-width="85"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">Angular</span><span class="skill-pct">65%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c1" data-width="65"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">PHP</span><span class="skill-pct">60%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c1" data-width="60"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">MySQL</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c1" data-width="75"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">REST API Design</span><span class="skill-pct">72%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c1" data-width="72"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QA Testing -->
+      <div class="skill-category-card reveal reveal-delay-1">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon">🧪</div>
+          <div>
+            <div class="skill-cat-name">QA / Testing</div>
+            <div class="skill-cat-count">4 Core Skills</div>
+          </div>
+        </div>
+        <div class="skill-list">
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">Selenium WebDriver</span><span class="skill-pct">80%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c2" data-width="80"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">TestNG Framework</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c2" data-width="75"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">OWASP / Security Testing</span><span class="skill-pct">65%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c2" data-width="65"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">Test Case Design</span><span class="skill-pct">82%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c2" data-width="82"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Creation -->
+      <div class="skill-category-card reveal">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon">✍️</div>
+          <div>
+            <div class="skill-cat-name">Content Creation</div>
+            <div class="skill-cat-count">4 Core Skills</div>
+          </div>
+        </div>
+        <div class="skill-list">
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">eCommerce Copywriting</span><span class="skill-pct">85%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c3" data-width="85"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">SEO Optimization</span><span class="skill-pct">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c3" data-width="75"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">Conversion Optimization</span><span class="skill-pct">70%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c3" data-width="70"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-row-top"><span class="skill-name">Indian Market Research</span><span class="skill-pct">78%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill c3" data-width="78"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools -->
+      <div class="skill-category-card reveal reveal-delay-1">
+        <div class="skill-cat-header">
+          <div class="skill-cat-icon">🛠️</div>
+          <div>
+            <div class="skill-cat-name">Tools &amp; Platforms</div>
+            <div class="skill-cat-count">12 Tools</div>
+          </div>
+        </div>
+        <div class="tools-grid">
+          <span class="tool-chip">Git / GitHub</span>
+          <span class="tool-chip">Gradle</span>
+          <span class="tool-chip">IntelliJ IDEA</span>
+          <span class="tool-chip">VS Code</span>
+          <span class="tool-chip">Postman</span>
+          <span class="tool-chip">Burp Suite</span>
+          <span class="tool-chip">OWASP ZAP</span>
+          <span class="tool-chip">Firebase</span>
+          <span class="tool-chip">Android Studio</span>
+          <span class="tool-chip">Google AR Core</span>
+          <span class="tool-chip">Google Analytics</span>
+          <span class="tool-chip">AI Tools (Be10X)</span>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /panel-skills -->
+
+  <!-- ──────────────────────────
+       EDUCATION PANEL
+  ────────────────────────────── -->
+  <div class="tab-panel" id="panel-education">
+
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-icon-row">
+          <div class="edu-icon">🎓</div>
+          <div>
+            <div class="edu-gpa">7.6</div>
+            <div class="edu-gpa-label">CGPA / 10</div>
+          </div>
+        </div>
+        <div class="edu-degree">Master in Computer Applications (MCA)</div>
+        <div class="edu-school">Anna University</div>
+        <div class="edu-period">2023 — 2025 · Full-time</div>
+        <p class="edu-desc">Specialized in software development, database management, and problem-solving across advanced algorithms, distributed systems, and software engineering principles. Completed capstone AR project using Google AR Core and Firebase.</p>
+      </div>
+
+      <div class="edu-card reveal reveal-delay-1">
+        <div class="edu-icon-row">
+          <div class="edu-icon">📐</div>
+          <div>
+            <div class="edu-gpa" style="color:var(--accent3);">Dist.</div>
+            <div class="edu-gpa-label">Graduated</div>
+          </div>
+        </div>
+        <div class="edu-degree">Bachelor in Computer Applications (BCA)</div>
+        <div class="edu-school">DR MGR Educational and Research Institute</div>
+        <div class="edu-period">2020 — 2023 · Full-time</div>
+        <p class="edu-desc">Built a solid foundation in programming, web development, and database management. Graduated with Distinction. First exposure to Java development led to the Core Java certification with Apollo Computers.</p>
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div class="cert-section-header reveal">
+      <div class="cert-section-title">Licenses &amp; Certifications</div>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card reveal">
+        <div class="cert-num">01</div>
+        <div class="cert-name">Core Java Certified</div>
+        <div class="cert-issuer">Apollo Computers</div>
+        <div class="cert-year">2021</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-1">
+        <div class="cert-num">02</div>
+        <div class="cert-name">AI Tools Certification</div>
+        <div class="cert-issuer">Be10X</div>
+        <div class="cert-year">2025</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-2">
+        <div class="cert-num">03</div>
+        <div class="cert-name">Multimodal AI</div>
+        <div class="cert-issuer">Global Techno Solutions</div>
+        <div class="cert-year">2025</div>
+      </div>
+      <div class="cert-card reveal reveal-delay-3">
+        <div class="cert-num">04</div>
+        <div class="cert-name">Java Software Developer</div>
+        <div class="cert-issuer">Shiash Info Solutions</div>
+        <div class="cert-year">2023</div>
+      </div>
+    </div>
+
+  </div><!-- /panel-education -->
+
+</div><!-- /page-body -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Yuvaraj<span>.</span>Pandian</div>
+      <div class="footer-copy">© 2026 Yuvaraj Pandian. All rights reserved.</div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.instagram.com/_yuviii_24?igsh=bW5mMjdrZ2lhbjRx" target="_blank" rel="noopener" class="social-link instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="https://x.com/Yuvaraj241003" target="_blank" rel="noopener" class="social-link twitter">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/yuvaraj-pandian24" target="_blank" rel="noopener" class="social-link linkedin">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://github.com/yuvarajpandiyan24" target="_blank" rel="noopener" class="social-link github">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+    </div>
+    <div class="footer-right">
+      <div>Designed &amp; built with ♥</div>
+      <div>by <a href="index.html">Yuvaraj Pandian</a></div>
+      <div style="margin-top:.4rem;font-size:.58rem;">v2026.03</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══ ROLE DETAIL OVERLAY ══ -->
+<div class="role-overlay" id="roleOverlay">
+  <div class="overlay-nav">
+    <button class="overlay-back" id="overlayBack">← Back to Experience</button>
+    <a href="index.html" class="overlay-nav-brand">Yuvaraj<span>.</span>Pandian</a>
+  </div>
+  <div class="role-detail" id="roleDetail"></div>
+</div>
+
+<!-- ══ ROLE DATA ══ -->
+<script>
+const ROLES = {
+
+  'role-tradesala': {
+    title: 'Associate Trainee',
+    company: 'Tradesala Technologies',
+    period: '2026 — Present',
+    type: 'Full-time · Chennai, Tamil Nadu · On-site',
+    badges: [
+      { label: 'Engineering', cls: 'badge-dev' },
+      { label: 'QA Testing',  cls: 'badge-qa'  },
+      { label: 'Content',     cls: 'badge-con' }
+    ],
+    tags: ['Java','Angular','PHP','Selenium','TestNG','Gradle','Content Writing','SEO','eCommerce'],
+    lead: 'A multi-disciplinary role at a growing eCommerce startup where one person does the work of three — building backend systems by day, writing automation test suites by afternoon, and crafting product descriptions that actually convert.',
+    meta: { Location: 'Chennai, TN', Type: 'Full-time', Duration: '6+ Months', Sector: 'eCommerce / Tech' },
+    body: `
+      <h2>The Role in Context</h2>
+      <p>Tradesala Technologies is a Chennai-based eCommerce startup building a homegrown marketplace platform. As an Associate Trainee, my work spans three entirely different disciplines simultaneously — a deliberate arrangement designed to give early-career engineers holistic exposure to how digital products actually get made and sold.</p>
+      <p>The result is a workday that shifts between writing Java service code in the morning, running Selenium test suites after lunch, and producing product catalogue content in the afternoon. It's demanding, but it produces a genuinely unusual combination of skills.</p>
+
+      <div class="highlight-box">
+        <div class="highlight-item"><div class="highlight-num">40+</div><div class="highlight-label">Test Cases Written</div></div>
+        <div class="highlight-item"><div class="highlight-num">300+</div><div class="highlight-label">Product Descriptions</div></div>
+        <div class="highlight-item"><div class="highlight-num">3</div><div class="highlight-label">Bug-Free Deployments</div></div>
+      </div>
+
+      <h2>Engineering — Java &amp; Angular</h2>
+      <p>Backend development on the platform's Java service layer, including REST API endpoints consumed by the Angular frontend. Work includes implementing new product catalogue APIs, fixing integration bugs, and contributing to the PHP-based admin panel.</p>
+      <pre><code>// Sample: Product search endpoint
+@GetMapping("/api/products/search")
+public ResponseEntity&lt;List&lt;Product&gt;&gt; searchProducts(
+    @RequestParam String query,
+    @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "20") int size) {
+  
+  Pageable pageable = PageRequest.of(page, size);
+  List&lt;Product&gt; results = productService.search(query, pageable);
+  return ResponseEntity.ok(results);
+}</code></pre>
+
+      <h2>QA — Selenium Automation</h2>
+      <p>Owns the automation testing suite covering the full purchase funnel: search → product detail → add to cart → checkout → confirmation. Built using Selenium WebDriver + TestNG with the Page Object Model pattern, executed via Gradle build scripts.</p>
+      <ul>
+        <li>Reduced regression testing time from manual 6-hour cycles to 18-minute automated runs</li>
+        <li>Caught three critical regressions before production deployment</li>
+        <li>Maintained a living test suite that adapts to UI changes without full rewrites</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-title">💡 Key Insight</div>
+        The most valuable QA work is deciding what <em>not</em> to automate. Unstable UI elements and new features still in flux cost more in maintenance than they save in testing time. The 40 test cases cover 85% of critical paths deliberately.
+      </div>
+
+      <h2>Content — eCommerce Product Writing</h2>
+      <p>Producing SEO-optimized product descriptions for the Indian market — applying a conversion-focused framework that leads with benefits, integrates trust signals, and uses Hinglish search patterns for high-intent queries.</p>
+      <p>The content work revealed something surprising: a well-written product description consistently outperforms a mediocre one by 15–25% on add-to-cart rate, even when the price and images are identical. Content is a product surface, not a back-office task.</p>
+    `
+  },
+
+  'role-shiash': {
+    title: 'Java Software Developer',
+    company: 'Shiash Info Solutions',
+    period: '2023 — 2023',
+    type: 'Internship · Chennai, Tamil Nadu · On-site',
+    badges: [
+      { label: 'Engineering', cls: 'badge-dev' }
+    ],
+    tags: ['Java','J2EE','JavaScript','MySQL','HTML & CSS','REST APIs','Servlet','JSP'],
+    lead: 'First exposure to production Java development — learning enterprise architecture patterns, writing real backend code that served real users, and understanding what separates academic Java from production Java.',
+    meta: { Location: 'Chennai, TN', Type: 'Internship', Duration: '~3 Months', Sector: 'IT Services' },
+    body: `
+      <h2>First Production Code</h2>
+      <p>Shiash Info Solutions is a Chennai-based IT services company. This internship was the first time my Java code ran in an environment with real users and real consequences — a significant shift from academic projects where broken code just fails a test case.</p>
+      <p>The experience fundamentally changed how I think about software. Academic Java is about making things work. Production Java is about making things <strong>not break</strong> — which requires a completely different mindset around error handling, logging, and defensive programming.</p>
+
+      <div class="highlight-box">
+        <div class="highlight-item"><div class="highlight-num">J2EE</div><div class="highlight-label">Architecture</div></div>
+        <div class="highlight-item"><div class="highlight-num">MVC</div><div class="highlight-label">Pattern Used</div></div>
+        <div class="highlight-item"><div class="highlight-num">REST</div><div class="highlight-label">APIs Built</div></div>
+      </div>
+
+      <h2>Technical Work</h2>
+      <p>Work focused on the backend layer of a J2EE web application using the MVC pattern. Servlets handled HTTP routing and business logic. JSP templates rendered the view layer. MySQL stored application data.</p>
+      <pre><code>// Sample: Servlet handling user data fetch
+@WebServlet("/user/profile")
+public class UserProfileServlet extends HttpServlet {
+  protected void doGet(HttpServletRequest req,
+                       HttpServletResponse res)
+      throws ServletException, IOException {
+    
+    int userId = Integer.parseInt(req.getParameter("id"));
+    User user  = userDAO.findById(userId);
+    
+    if (user == null) {
+      res.sendError(HttpServletResponse.SC_NOT_FOUND);
+      return;
+    }
+    req.setAttribute("user", user);
+    req.getRequestDispatcher("/WEB-INF/profile.jsp")
+       .forward(req, res);
+  }
+}</code></pre>
+
+      <h2>What I Actually Learned</h2>
+      <p>The technical skills — Servlet lifecycle, JDBC connections, SQL joins — were expected. The unexpected lessons were more valuable:</p>
+      <ul>
+        <li><strong>Reading before writing:</strong> Most of the first month was spent reading existing code, not writing new code. Understanding the codebase before touching it prevents architectural damage.</li>
+        <li><strong>Error handling is not optional:</strong> Academic code can throw exceptions and crash. Production code needs to fail gracefully, log meaningfully, and recover where possible.</li>
+        <li><strong>Code reviews are a gift:</strong> Feedback from senior developers on pull requests was uncomfortable initially and invaluable retrospectively.</li>
+      </ul>
+
+      <blockquote>
+        "If your code only works when nothing goes wrong, it doesn't work." — senior developer feedback I still think about.
+      </blockquote>
+
+      <h2>Certificate &amp; Outcome</h2>
+      <p>Completed the internship with a Java Software Developer certification from Shiash Info Solutions. The experience directly informed the architecture decisions in my MCA capstone project and set the foundation for the backend work at Tradesala.</p>
+    `
+  }
+};
+
+/* ── Cursor ── */
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+if (window.matchMedia('(hover: hover)').matches) {
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = (e.clientX - 5) + 'px';
+    cursor.style.top  = (e.clientY - 5) + 'px';
+    ring.style.left   = (e.clientX - 18) + 'px';
+    ring.style.top    = (e.clientY - 18) + 'px';
+  });
+  document.querySelectorAll('a, button, .exp-entry').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; ring.style.transform = 'scale(1.5)'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; });
+  });
+}
+
+/* ── Hamburger ── */
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('.mobile-menu a').forEach(l => l.addEventListener('click', () => {
+  hamburger.classList.remove('open'); mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}));
+
+/* ── Scroll Reveal ── */
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ── Tabs ── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+
+    // Trigger skill bar animation when skills panel opens
+    if (btn.dataset.tab === 'skills') {
+      setTimeout(animateSkillBars, 100);
+    }
+  });
+});
+
+/* ── Skill Bars ── */
+function animateSkillBars() {
+  document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+    bar.style.width = bar.dataset.width + '%';
+  });
+}
+
+/* ── Role Overlay ── */
+const overlay    = document.getElementById('roleOverlay');
+const roleDetail = document.getElementById('roleDetail');
+const progFill   = document.getElementById('progressFill');
+
+function buildRoleHTML(role) {
+  const badgesHTML   = role.badges.map(b => `<span class="role-cat-badge ${b.cls}">${b.label}</span>`).join('');
+  const tagsHTML     = role.tags.map(t => `<span class="role-footer-tag">${t}</span>`).join('');
+  const metaRowsHTML = Object.entries(role.meta).map(([k, v]) =>
+    `<div class="meta-item"><div class="meta-label">${k}</div><div class="meta-value">${v}</div></div>`
+  ).join('');
+  const metaTagsHTML = role.tags.map(t => `<div class="meta-tag">${t}</div>`).join('');
+
+  return `
+    <div class="role-header-area">
+      <div>
+        <div class="role-badge-row">${badgesHTML}</div>
+        <h1 class="role-title-large">${role.title}</h1>
+        <div class="role-company-large">${role.company}</div>
+        <div class="role-period-large">${role.period} · ${role.type}</div>
+        <div class="role-lead">${role.lead}</div>
+      </div>
+      <div class="role-meta-box">
+        ${metaRowsHTML}
+        <div class="meta-item">
+          <div class="meta-label">Technologies</div>
+          <div class="meta-tags">${metaTagsHTML}</div>
+        </div>
+      </div>
+    </div>
+    <div class="role-body">${role.body}</div>
+    <div class="role-footer">
+      <div class="role-footer-tags">${tagsHTML}</div>
+    </div>
+  `;
+}
+
+function openRole(roleId) {
+  const role = ROLES[roleId];
+  if (!role) return;
+  roleDetail.innerHTML = buildRoleHTML(role);
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  overlay.scrollTop = 0;
+  progFill.style.width = '0%';
+  history.pushState({ role: roleId }, '', '#' + roleId);
+}
+
+function closeRole() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  history.pushState({}, '', window.location.pathname);
+}
+
+// Open via "View Details" button
+document.querySelectorAll('.entry-cta').forEach(btn => {
+  btn.addEventListener('click', () => openRole(btn.dataset.role));
+});
+// Open via clicking the card anywhere
+document.querySelectorAll('.exp-entry').forEach(entry => {
+  entry.querySelector('.entry-card').addEventListener('click', (e) => {
+    if (e.target.classList.contains('entry-cta')) return; // handled above
+    openRole(entry.dataset.role);
+  });
+});
+
+document.getElementById('overlayBack').addEventListener('click', closeRole);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeRole(); });
+window.addEventListener('popstate', e => { if (!e.state || !e.state.role) closeRole(); });
+
+// Reading progress
+overlay.addEventListener('scroll', () => {
+  const s = overlay.scrollHeight - overlay.clientHeight;
+  progFill.style.width = s > 0 ? (overlay.scrollTop / s * 100) + '%' : '0%';
+});
+
+// Direct URL hash
+if (window.location.hash) {
+  const hash = window.location.hash.slice(1);
+  if (ROLES[hash]) setTimeout(() => openRole(hash), 300);
+}
+</script>
+</body>
+</html>

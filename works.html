@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Works — Yuvaraj Pandian</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   ROOT & RESET
+═══════════════════════════════════════════ */
+:root {
+  --bg: #0a0a0f;
+  --surface: #12121a;
+  --surface2: #1a1a26;
+  --accent1: #c8ff00;
+  --accent2: #ff3b6e;
+  --accent3: #00d4ff;
+  --text: #e8e8f0;
+  --text-dim: #7a7a99;
+  --border: rgba(255,255,255,0.07);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  background: var(--bg); color: var(--text);
+  font-family: 'DM Mono', monospace; font-size: 14px; line-height: 1.6; cursor: none;
+}
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.022; pointer-events: none; z-index: 9997;
+}
+
+/* ═══════════════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════════════ */
+.cursor, .cursor-ring { position: fixed; pointer-events: none; border-radius: 50%; z-index: 9999; display: none; }
+@media (hover: hover) {
+  .cursor { display: block; width: 10px; height: 10px; background: var(--accent1); mix-blend-mode: difference; transition: transform 0.15s ease; }
+  .cursor-ring { display: block; width: 36px; height: 36px; border: 1.5px solid var(--accent1); z-index: 9998; mix-blend-mode: difference; transition: left 0.1s ease, top 0.1s ease, transform 0.3s ease; }
+  body, a, button { cursor: none; }
+}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(10,10,15,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.02em; color: var(--text); text-decoration: none; flex-shrink: 0; }
+.nav-logo span { color: var(--accent1); }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.45rem 0.9rem; position: relative; transition: color 0.2s; }
+.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0.9rem; right: 0.9rem; height: 1px; background: var(--accent1); transform: scaleX(0); transition: transform 0.3s ease; }
+.nav-links a:hover, .nav-links a.active { color: var(--text); }
+.nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+.nav-status { display: flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; color: var(--text-dim); flex-shrink: 0; }
+.status-dot { width: 6px; height: 6px; background: var(--accent1); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);} }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+.mobile-menu { display: none; position: fixed; inset: 0; z-index: 290; background: rgba(10,10,15,0.98); backdrop-filter: blur(20px); flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.8rem,8vw,2.5rem); color: var(--text-dim); text-decoration: none; text-transform: uppercase; padding: 0.4rem 1rem; transition: color 0.2s; }
+.mobile-menu a:hover { color: var(--accent1); }
+.mobile-menu-footer { position: absolute; bottom: 2rem; font-size: 0.65rem; color: var(--text-dim); letter-spacing: 0.15em; }
+
+/* ═══════════════════════════════════════════
+   WORKS HERO
+═══════════════════════════════════════════ */
+.works-hero {
+  padding: 160px 3rem 80px;
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.works-hero .grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at 20% 50%, black 20%, transparent 70%);
+}
+/* Floating accent shapes */
+.hero-shape {
+  position: absolute; border-radius: 2px;
+  border: 1px solid var(--border);
+  animation: float 6s ease-in-out infinite;
+}
+.hero-shape-1 { width: 80px; height: 80px; right: 12%; top: 25%; animation-delay: 0s; background: rgba(200,255,0,0.03); }
+.hero-shape-2 { width: 140px; height: 140px; right: 22%; top: 45%; animation-delay: 1.5s; background: rgba(0,212,255,0.02); }
+.hero-shape-3 { width: 50px; height: 50px; right: 8%; top: 60%; animation-delay: 3s; background: rgba(255,59,110,0.03); }
+@keyframes float { 0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-16px) rotate(3deg);} }
+
+.back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s; }
+.back-link:hover { color: var(--accent1); }
+.works-hero-eyebrow { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent1); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.works-hero-eyebrow::before { content: ''; width: 36px; height: 1px; background: var(--accent1); }
+.works-hero-title { font-family: 'Fraunces', serif; font-size: clamp(3rem, 8vw, 7.5rem); font-weight: 700; line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+.works-hero-title .italic { font-style: italic; font-weight: 300; color: var(--text-dim); }
+.works-hero-title .accent { color: var(--accent1); }
+.works-hero-desc { max-width: 480px; color: var(--text-dim); font-size: 0.83rem; line-height: 1.85; margin-bottom: 2.5rem; }
+
+/* Discipline stats */
+.discipline-stats { display: flex; gap: 2px; }
+.disc-stat {
+  padding: 1rem 1.5rem; border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.disc-stat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.disc-stat-dot.dev { background: var(--accent1); }
+.disc-stat-dot.qa  { background: var(--accent2); }
+.disc-stat-dot.con { background: var(--accent3); }
+.disc-stat-label { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); }
+.disc-stat-count { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--text); }
+
+/* ═══════════════════════════════════════════
+   FILTER BAR
+═══════════════════════════════════════════ */
+.filter-bar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 0 3rem; position: sticky; top: 65px; z-index: 100;
+  display: flex; align-items: center; gap: 0; overflow-x: auto;
+}
+.filter-btn {
+  background: none; border: none; padding: 1rem 1.25rem;
+  font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-dim);
+  position: relative; white-space: nowrap; transition: color 0.2s;
+}
+.filter-btn::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent1); transform: scaleX(0); transition: transform 0.3s ease; }
+.filter-btn.qa-btn::after { background: var(--accent2); }
+.filter-btn.con-btn::after { background: var(--accent3); }
+.filter-btn:hover, .filter-btn.active { color: var(--text); }
+.filter-btn.active::after { transform: scaleX(1); }
+.filter-count { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; background: var(--surface2); border-radius: 50%; font-size: 0.5rem; margin-left: 0.4rem; color: var(--text-dim); }
+.filter-btn.active .filter-count { background: var(--accent1); color: var(--bg); }
+.filter-btn.active.qa-btn .filter-count { background: var(--accent2); }
+.filter-btn.active.con-btn .filter-count { background: var(--accent3); }
+
+/* Sort control */
+.filter-right { margin-left: auto; padding: 0 1rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); white-space: nowrap; }
+
+/* ═══════════════════════════════════════════
+   WORKS GRID SECTION
+═══════════════════════════════════════════ */
+.works-body { padding: 3rem; }
+
+/* Category group header */
+.category-group { margin-bottom: 3rem; }
+.category-group-header {
+  display: flex; align-items: center; gap: 1rem;
+  margin-bottom: 1.5rem; padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.category-group-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.category-group-dot.dev { background: var(--accent1); }
+.category-group-dot.qa  { background: var(--accent2); }
+.category-group-dot.con { background: var(--accent3); }
+.category-group-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.category-group-name.dev { color: var(--accent1); }
+.category-group-name.qa  { color: var(--accent2); }
+.category-group-name.con { color: var(--accent3); }
+.category-group-count { font-size: 0.6rem; color: var(--text-dim); margin-left: auto; }
+
+/* Grid */
+.works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.works-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+
+/* Work Card */
+.work-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 2rem; position: relative; overflow: hidden;
+  transition: border-color 0.3s, background 0.3s, transform 0.3s;
+  display: flex; flex-direction: column; gap: 0;
+}
+.work-card::before {
+  content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.35s;
+  pointer-events: none;
+}
+.work-card.dev::before  { background: radial-gradient(circle at 0 0, rgba(200,255,0,0.07), transparent 65%); }
+.work-card.qa::before   { background: radial-gradient(circle at 0 0, rgba(255,59,110,0.07), transparent 65%); }
+.work-card.con::before  { background: radial-gradient(circle at 0 0, rgba(0,212,255,0.07), transparent 65%); }
+.work-card:hover::before { opacity: 1; }
+.work-card.dev:hover  { border-color: rgba(200,255,0,0.35); }
+.work-card.qa:hover   { border-color: rgba(255,59,110,0.35); }
+.work-card.con:hover  { border-color: rgba(0,212,255,0.35); }
+
+/* Top accent strip */
+.work-card-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+}
+.work-card.dev .work-card-accent  { background: var(--accent1); }
+.work-card.qa .work-card-accent   { background: var(--accent2); }
+.work-card.con .work-card-accent  { background: var(--accent3); }
+.work-card:hover .work-card-accent { transform: scaleX(1); }
+
+.work-card-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.25rem; }
+.work-num { font-family: 'Fraunces', serif; font-size: 0.65rem; color: var(--text-dim); }
+.work-type-badge {
+  font-size: 0.52rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.2rem 0.6rem; border-radius: 1px;
+}
+.work-type-badge.dev  { background: rgba(200,255,0,0.1);  color: var(--accent1); }
+.work-type-badge.qa   { background: rgba(255,59,110,0.1); color: var(--accent2); }
+.work-type-badge.con  { background: rgba(0,212,255,0.1);  color: var(--accent3); }
+
+/* Icon area */
+.work-icon-area {
+  width: 52px; height: 52px; border: 1px solid var(--border);
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 1.1rem; background: var(--surface2);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.work-card.dev:hover .work-icon-area  { border-color: rgba(200,255,0,0.3); transform: scale(1.05); }
+.work-card.qa:hover .work-icon-area   { border-color: rgba(255,59,110,0.3); transform: scale(1.05); }
+.work-card.con:hover .work-icon-area  { border-color: rgba(0,212,255,0.3); transform: scale(1.05); }
+
+.work-title { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; line-height: 1.25; margin-bottom: 0.65rem; }
+.work-desc { font-size: 0.73rem; color: var(--text-dim); line-height: 1.75; margin-bottom: 1.1rem; flex: 1; }
+
+.work-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 1.25rem; }
+.work-tag { font-size: 0.56rem; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.18rem 0.5rem; background: var(--bg); border: 1px solid var(--border); border-radius: 2px; color: var(--text-dim); }
+
+/* Card footer */
+.work-card-footer { display: flex; align-items: center; justify-content: space-between; }
+.work-meta-row { display: flex; flex-direction: column; gap: 0.15rem; }
+.work-status { font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); }
+.work-year { font-family: 'Fraunces', serif; font-size: 0.85rem; font-weight: 700; color: var(--text-dim); }
+
+.work-btn {
+  width: 36px; height: 36px; border: 1px solid var(--border);
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; font-size: 0.8rem; color: var(--text-dim);
+  background: none; transition: all 0.3s; flex-shrink: 0;
+}
+.work-card.dev:hover .work-btn  { background: var(--accent1); border-color: var(--accent1); color: var(--bg); transform: rotate(45deg); }
+.work-card.qa:hover .work-btn   { background: var(--accent2); border-color: var(--accent2); color: white; transform: rotate(45deg); }
+.work-card.con:hover .work-btn  { background: var(--accent3); border-color: var(--accent3); color: var(--bg); transform: rotate(45deg); }
+
+/* Hidden */
+.work-card.hidden { display: none; }
+.category-group.hidden { display: none; }
+
+/* No results */
+.no-results { padding: 5rem 2rem; text-align: center; color: var(--text-dim); font-size: 0.8rem; display: none; }
+.no-results.visible { display: block; }
+.no-results-icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.4; }
+
+/* ═══════════════════════════════════════════
+   PROJECT DETAIL OVERLAY
+═══════════════════════════════════════════ */
+.project-overlay {
+  display: none; position: fixed; inset: 0; z-index: 500;
+  background: var(--bg); overflow-y: auto;
+  animation: overlayIn 0.35s ease;
+}
+.project-overlay.open { display: block; }
+@keyframes overlayIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+/* Progress bar */
+.read-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; background: var(--border); z-index: 600; }
+.read-progress-fill { height: 100%; background: var(--accent1); width: 0%; transition: width 0.1s; }
+
+/* Overlay nav */
+.overlay-nav {
+  position: sticky; top: 0; background: rgba(10,10,15,0.95);
+  backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+  padding: 1rem 3rem; display: flex; align-items: center;
+  justify-content: space-between; z-index: 10;
+}
+.overlay-back {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-dim); background: none; border: none; transition: color 0.2s;
+}
+.overlay-back:hover { color: var(--accent1); }
+.overlay-nav-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.9rem; text-decoration: none; color: var(--text); }
+.overlay-nav-brand span { color: var(--accent1); }
+
+/* Project detail content */
+.project-detail { max-width: 900px; margin: 0 auto; padding: 4rem 3rem 6rem; }
+
+/* Project hero area */
+.project-hero-area {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 2rem; align-items: start; margin-bottom: 3rem;
+}
+.project-category-badge {
+  font-size: 0.57rem; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 0.25rem 0.7rem; border-radius: 1px; margin-bottom: 1.1rem; display: inline-block;
+}
+.project-num { font-family: 'Fraunces', serif; font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+.project-title-large {
+  font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.25rem;
+}
+.project-lead {
+  font-size: 0.88rem; color: var(--text-dim); line-height: 1.85;
+  padding: 1.25rem; border-left: 3px solid var(--accent1);
+  background: var(--surface);
+}
+
+/* Meta sidebar in detail */
+.project-meta-box {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.5rem; min-width: 200px;
+}
+.meta-item { margin-bottom: 1.1rem; }
+.meta-item:last-child { margin-bottom: 0; }
+.meta-label { font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.3rem; }
+.meta-value { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.82rem; }
+.meta-tags { display: flex; flex-direction: column; gap: 0.3rem; }
+.meta-tag { font-size: 0.6rem; letter-spacing: 0.07em; padding: 0.22rem 0.6rem; border: 1px solid var(--border); border-radius: 2px; color: var(--text-dim); }
+
+/* Project body */
+.project-body { font-size: 0.84rem; line-height: 1.9; color: var(--text-dim); }
+.project-body h2 { font-family: 'Fraunces', serif; font-size: 1.55rem; font-weight: 700; color: var(--text); margin: 2.5rem 0 0.9rem; line-height: 1.1; }
+.project-body h3 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--text); margin: 1.75rem 0 0.65rem; letter-spacing: 0.03em; text-transform: uppercase; }
+.project-body p { margin-bottom: 1.1rem; }
+.project-body strong { color: var(--text); font-weight: 600; }
+.project-body ul, .project-body ol { padding-left: 1.5rem; margin-bottom: 1.1rem; }
+.project-body li { margin-bottom: 0.45rem; }
+.project-body li::marker { color: var(--accent1); }
+.project-body code { background: var(--surface2); border: 1px solid var(--border); padding: 0.15rem 0.45rem; border-radius: 2px; font-size: 0.78rem; color: var(--accent1); font-family: 'DM Mono', monospace; }
+.project-body pre { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent1); padding: 1.5rem; margin: 1.5rem 0; overflow-x: auto; border-radius: 2px; }
+.project-body pre code { background: none; border: none; padding: 0; color: var(--text); font-size: 0.76rem; line-height: 1.7; }
+.project-body blockquote { border-left: 3px solid var(--accent3); padding: 0.9rem 1.4rem; margin: 1.5rem 0; background: var(--surface); color: var(--text); font-style: italic; }
+.project-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+/* Highlight box */
+.highlight-box {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+  margin: 2rem 0;
+}
+.highlight-item { background: var(--surface); padding: 1.25rem; border: 1px solid var(--border); text-align: center; }
+.highlight-num { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 700; color: var(--accent1); line-height: 1; }
+.highlight-label { font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-top: 0.3rem; }
+
+/* Callout */
+.callout { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 1rem 1.25rem; margin: 1.5rem 0; border-radius: 0 2px 2px 0; }
+.callout-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.35rem; }
+
+/* Project footer */
+.project-footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.project-footer-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem; }
+.project-footer-tag { font-size: 0.58rem; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.25rem 0.65rem; border: 1px solid var(--border); border-radius: 2px; color: var(--text-dim); }
+
+/* Next/Prev navigation */
+.project-nav-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.project-nav-btn {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.25rem 1.5rem; text-decoration: none; color: inherit;
+  transition: border-color 0.3s, background 0.3s; display: block;
+}
+.project-nav-btn:hover { border-color: rgba(200,255,0,0.3); background: var(--surface2); }
+.project-nav-btn.next { text-align: right; }
+.project-nav-dir { font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.4rem; }
+.project-nav-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; line-height: 1.3; }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer { background: var(--surface2); border-top: 1px solid var(--border); padding: 2.5rem 3rem; }
+.footer-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 2rem; }
+.footer-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1rem; }
+.footer-brand span { color: var(--accent1); }
+.footer-copy { font-size: 0.62rem; color: var(--text-dim); margin-top: 0.2rem; }
+.social-links { display: flex; gap: 0.5rem; justify-content: center; }
+.social-link { width: 44px; height: 44px; border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-dim); transition: all 0.3s; position: relative; overflow: hidden; }
+.social-link::before { content: ''; position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s; }
+.social-link.instagram::before { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.social-link.twitter::before { background: #000; }
+.social-link.linkedin::before { background: #0077b5; }
+.social-link.github::before { background: #333; }
+.social-link:hover::before { opacity: 1; }
+.social-link:hover { border-color: transparent; color: white; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+.social-link svg { width: 17px; height: 17px; position: relative; z-index: 1; fill: currentColor; }
+.footer-right { text-align: right; font-size: 0.62rem; color: var(--text-dim); line-height: 1.85; }
+.footer-right a { color: var(--accent1); text-decoration: none; }
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .works-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr auto; }
+  .footer-right { display: none; }
+}
+@media (max-width: 768px) {
+  nav, .works-hero, .filter-bar, .works-body, footer { padding-left: 1.1rem; padding-right: 1.1rem; }
+  .nav-links, .nav-status { display: none; }
+  .hamburger { display: flex; }
+  .works-hero { padding-top: 120px; padding-bottom: 50px; }
+  .works-hero-title { font-size: clamp(2.5rem, 12vw, 5rem); }
+  .discipline-stats { flex-wrap: wrap; }
+  .works-grid { grid-template-columns: 1fr; }
+  .works-grid.two-col { grid-template-columns: 1fr; }
+  .project-hero-area { grid-template-columns: 1fr; }
+  .project-meta-box { min-width: unset; }
+  .highlight-box { grid-template-columns: repeat(2, 1fr); }
+  .project-nav-row { grid-template-columns: 1fr; }
+  .overlay-nav { padding: 1rem 1.25rem; }
+  .project-detail { padding: 2rem 1.25rem 4rem; }
+  .footer-inner { grid-template-columns: 1fr; text-align: center; gap: 1.25rem; }
+}
+@media (max-width: 480px) {
+  .works-hero-title { font-size: clamp(2rem, 14vw, 3.5rem); }
+  .highlight-box { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Reading progress -->
+<div class="read-progress"><div class="read-progress-fill" id="progressFill"></div></div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="index.html" class="nav-logo">Yuvaraj<span>.</span>Pandian</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="works.html" class="active">Works</a></li>
+    <li><a href="index.html#experience">Experience</a></li>
+    <li><a href="index.html#study">Study</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-status"><div class="status-dot"></div>Eager to Contribute &amp; Grow</div>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mobile-nav-link">Home</a>
+  <a href="works.html" class="mobile-nav-link">Works</a>
+  <a href="index.html#experience" class="mobile-nav-link">Experience</a>
+  <a href="index.html#study" class="mobile-nav-link">Study</a>
+  <a href="blog.html" class="mobile-nav-link">Blog</a>
+  <a href="index.html#contact" class="mobile-nav-link">Contact</a>
+  <div class="mobile-menu-footer">Eager to Contribute &amp; Grow ●</div>
+</div>
+
+<!-- ═══ WORKS HERO ═══ -->
+<div class="works-hero">
+  <div class="grid-bg"></div>
+  <div class="hero-shape hero-shape-1"></div>
+  <div class="hero-shape hero-shape-2"></div>
+  <div class="hero-shape hero-shape-3"></div>
+
+  <a href="index.html" class="back-link reveal">← Back to Portfolio</a>
+  <div class="works-hero-eyebrow reveal">Projects &amp; Case Studies</div>
+  <h1 class="works-hero-title reveal">
+    <div>All</div>
+    <div class="italic">Works<span class="accent">.</span></div>
+  </h1>
+  <p class="works-hero-desc reveal reveal-delay-1">
+    Six projects across three disciplines — engineering, quality assurance, and content creation. Each one built, broken, and refined until it was ready.
+  </p>
+  <div class="discipline-stats reveal reveal-delay-2">
+    <div class="disc-stat">
+      <div class="disc-stat-dot dev"></div>
+      <div>
+        <div class="disc-stat-label">Engineering</div>
+        <div class="disc-stat-count">2 Projects</div>
+      </div>
+    </div>
+    <div class="disc-stat">
+      <div class="disc-stat-dot qa"></div>
+      <div>
+        <div class="disc-stat-label">QA / Testing</div>
+        <div class="disc-stat-count">2 Projects</div>
+      </div>
+    </div>
+    <div class="disc-stat">
+      <div class="disc-stat-dot con"></div>
+      <div>
+        <div class="disc-stat-label">Content</div>
+        <div class="disc-stat-count">2 Projects</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FILTER BAR ═══ -->
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">All Works <span class="filter-count">6</span></button>
+  <button class="filter-btn dev-btn" data-filter="dev">Engineering <span class="filter-count">2</span></button>
+  <button class="filter-btn qa-btn" data-filter="qa">QA / Testing <span class="filter-count">2</span></button>
+  <button class="filter-btn con-btn" data-filter="con">Content <span class="filter-count">2</span></button>
+  <div class="filter-right">6 Total Projects</div>
+</div>
+
+<!-- ═══ WORKS BODY ═══ -->
+<div class="works-body">
+
+  <!-- Engineering Group -->
+  <div class="category-group" id="group-dev">
+    <div class="category-group-header reveal">
+      <div class="category-group-dot dev"></div>
+      <div class="category-group-name dev">Software Engineering</div>
+      <div class="category-group-count">2 Projects</div>
+    </div>
+    <div class="works-grid two-col">
+
+      <!-- Project 01 -->
+      <div class="work-card dev reveal" data-cat="dev" data-project="proj-1">
+        <div class="work-card-accent"></div>
+        <div class="work-card-top">
+          <div class="work-num">01</div>
+          <span class="work-type-badge dev">Engineering</span>
+        </div>
+        <div class="work-icon-area">📱</div>
+        <h3 class="work-title">Revolutionizing Education With Interactive Augmented Reality</h3>
+        <p class="work-desc">Android-based interactive AR learning application built with Java backend and Firebase Cloud, delivering immersive real-time educational experiences with scalable and secure cloud integration.</p>
+        <div class="work-tags">
+          <span class="work-tag">Java</span><span class="work-tag">Google AR Core</span>
+          <span class="work-tag">Android</span><span class="work-tag">Firebase</span>
+        </div>
+        <div class="work-card-footer">
+          <div class="work-meta-row">
+            <div class="work-status">Academic Project</div>
+            <div class="work-year">2024</div>
+          </div>
+          <button class="work-btn">↗</button>
+        </div>
+      </div>
+
+      <!-- Project 02 -->
+      <div class="work-card dev reveal reveal-delay-1" data-cat="dev" data-project="proj-2">
+        <div class="work-card-accent"></div>
+        <div class="work-card-top">
+          <div class="work-num">02</div>
+          <span class="work-type-badge dev">Engineering</span>
+        </div>
+        <div class="work-icon-area">🔐</div>
+        <h3 class="work-title">Contemporary Guidelines Based AEGIS Mechanism for Gateway</h3>
+        <p class="work-desc">A guidelines-based Aegis mechanism for gateway security designed to ensure robust protection, real-time threat detection, and compliance-driven access control across network systems.</p>
+        <div class="work-tags">
+          <span class="work-tag">Java</span><span class="work-tag">J2EE</span>
+          <span class="work-tag">MySQL</span><span class="work-tag">Encryption</span>
+        </div>
+        <div class="work-card-footer">
+          <div class="work-meta-row">
+            <div class="work-status">Academic Project</div>
+            <div class="work-year">2023</div>
+          </div>
+          <button class="work-btn">↗</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QA Group -->
+  <div class="category-group" id="group-qa">
+    <div class="category-group-header reveal">
+      <div class="category-group-dot qa"></div>
+      <div class="category-group-name qa">QA / Testing</div>
+      <div class="category-group-count">2 Projects</div>
+    </div>
+    <div class="works-grid two-col">
+
+      <!-- Project 03 -->
+      <div class="work-card qa reveal" data-cat="qa" data-project="proj-3">
+        <div class="work-card-accent"></div>
+        <div class="work-card-top">
+          <div class="work-num">03</div>
+          <span class="work-type-badge qa">QA / Testing</span>
+        </div>
+        <div class="work-icon-area">🛒</div>
+        <h3 class="work-title">E-Commerce Website Automation Testing</h3>
+        <p class="work-desc">Automation testing on an eCommerce website to validate functionality, ensure seamless UX, and maintain high quality across critical workflows — product search, cart, checkout, and payment.</p>
+        <div class="work-tags">
+          <span class="work-tag">Selenium</span><span class="work-tag">TestNG</span>
+          <span class="work-tag">Gradle</span><span class="work-tag">Git</span>
+        </div>
+        <div class="work-card-footer">
+          <div class="work-meta-row">
+            <div class="work-status">Professional</div>
+            <div class="work-year">2026</div>
+          </div>
+          <button class="work-btn">↗</button>
+        </div>
+      </div>
+
+      <!-- Project 04 -->
+      <div class="work-card qa reveal reveal-delay-1" data-cat="qa" data-project="proj-4">
+        <div class="work-card-accent"></div>
+        <div class="work-card-top">
+          <div class="work-num">04</div>
+          <span class="work-type-badge qa">QA / Testing</span>
+        </div>
+        <div class="work-icon-area">🛡️</div>
+        <h3 class="work-title">Security Audit Suite</h3>
+        <p class="work-desc">Penetration testing toolkit for web applications. Identified 200+ vulnerabilities across client projects, leading to OWASP compliance certifications and strengthened security posture.</p>
+        <div class="work-tags">
+          <span class="work-tag">OWASP</span><span class="work-tag">Burp Suite</span>
+          <span class="work-tag">Python</span><span class="work-tag">Postman</span>
+        </div>
+        <div class="work-card-footer">
+          <div class="work-meta-row">
+            <div class="work-status">Professional</div>
+            <div class="work-year">2026</div>
+          </div>
+          <button class="work-btn">↗</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Content Group -->
+  <div class="category-group" id="group-con">
+    <div class="category-group-header reveal">
+      <div class="category-group-dot con"></div>
+      <div class="category-group-name con">Content Creation</div>
+      <div class="category-group-count">2 Projects</div>
+    </div>
+    <div class="works-grid two-col">
+
+      <!-- Project 05 -->
+      <div class="work-card con reveal" data-cat="con" data-project="proj-5">
+        <div class="work-card-accent"></div>
+        <div class="work-card-top">
+          <div class="work-num">05</div>
+          <span class="work-type-badge con">Content</span>
+        </div>
+        <div class="work-icon-area">✍️</div>
+        <h3 class="work-title">E-Commerce Content Strategy</h3>
+        <p class="work-desc">Creating and managing high-quality eCommerce content focused on product descriptions, discount campaigns, SEO optimization, and customer engagement strategies to improve conversions.</p>
+        <div class="work-tags">
+          <span class="work-tag">E-Commerce</span><span class="work-tag">Product Content</span>
+          <span class="work-tag">SEO</span><span class="work-tag">Analytics</span>
+        </div>
+        <div class="work-card-footer">
+          <div class="work-meta-row">
+            <div class="work-status">Professional</div>
+            <div class="work-year">2026</div>
+          </div>
+          <button class="work-btn">↗</button>
+        </div>
+      </div>
+
+      <!-- Project 06 -->
+      <div class="work-card con reveal reveal-delay-1" data-cat="con" data-project="proj-6">
+        <div class="work-card-accent"></div>
+        <div class="work-card-top">
+          <div class="work-num">06</div>
+          <span class="work-type-badge con">Content</span>
+        </div>
+        <div class="work-icon-area">🇮🇳</div>
+        <h3 class="work-title">India-Focused E-Commerce Content Development</h3>
+        <p class="work-desc">Crafting data-driven and culturally relevant content for Indian eCommerce products, highlighting local preferences, pricing strategies, seasonal demand, and trust-building elements.</p>
+        <div class="work-tags">
+          <span class="work-tag">Indian Consumer Insights</span>
+          <span class="work-tag">Sales Optimization</span><span class="work-tag">Content Strategy</span>
+        </div>
+        <div class="work-card-footer">
+          <div class="work-meta-row">
+            <div class="work-status">Professional</div>
+            <div class="work-year">2026</div>
+          </div>
+          <button class="work-btn">↗</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="no-results" id="noResults">
+    <div class="no-results-icon">🔍</div>
+    <div>No projects found in this category.</div>
+  </div>
+
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Yuvaraj<span>.</span>Pandian</div>
+      <div class="footer-copy">© 2026 Yuvaraj Pandian. All rights reserved.</div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.instagram.com/_yuviii_24?igsh=bW5mMjdrZ2lhbjRx" target="_blank" rel="noopener noreferrer" class="social-link instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      </a>
+      <a href="https://x.com/Yuvaraj241003" target="_blank" rel="noopener noreferrer" class="social-link twitter">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/yuvaraj-pandian24" target="_blank" rel="noopener noreferrer" class="social-link linkedin">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://github.com/yuvarajpandiyan24" target="_blank" rel="noopener noreferrer" class="social-link github">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+    </div>
+    <div class="footer-right">
+      <div>Designed &amp; built with ♥</div>
+      <div>by <a href="index.html">Yuvaraj Pandian</a></div>
+      <div style="margin-top:0.4rem;font-size:0.58rem;">v2026.03</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ PROJECT DETAIL OVERLAY ═══ -->
+<div class="project-overlay" id="projectOverlay">
+  <div class="overlay-nav">
+    <button class="overlay-back" id="overlayBack">← Back to Works</button>
+    <a href="index.html" class="overlay-nav-brand">Yuvaraj<span>.</span>Pandian</a>
+  </div>
+  <div class="project-detail" id="projectDetail"></div>
+</div>
+
+<!-- ═══ PROJECT DATA ═══ -->
+<script>
+const PROJECTS = {
+
+  'proj-1': {
+    num: '01', cat: 'dev', catLabel: 'Software Engineering',
+    title: 'Revolutionizing Education With Interactive Augmented Reality',
+    year: '2024', status: 'Academic Project',
+    tags: ['Java','Google AR Core','Android','Firebase','OpenGL ES'],
+    lead: 'An Android-based AR learning application that overlays interactive 3D models on physical textbook pages in real time — making abstract educational concepts tangible and immersive.',
+    prev: null, next: 'proj-2',
+    prevTitle: '', nextTitle: 'AEGIS Security Mechanism',
+    body: `
+      <h2>The Problem Worth Solving</h2>
+      <p>Most educational mobile apps are glorified PDFs. They present the same static text in a slightly more portable format. When students struggle with 3D concepts — molecular structures, anatomical models, geometric proofs — a flat image on a screen rarely bridges the understanding gap.</p>
+      <p>This project set out to change that by using <strong>Augmented Reality</strong> to let students point their phone at a textbook page and watch a full 3D model appear, rotate, and interact in real space.</p>
+
+      <div class="highlight-box">
+        <div class="highlight-item"><div class="highlight-num">3D</div><div class="highlight-label">Real-time Models</div></div>
+        <div class="highlight-item"><div class="highlight-num">&lt;300ms</div><div class="highlight-label">Marker Detection</div></div>
+        <div class="highlight-item"><div class="highlight-num">Firebase</div><div class="highlight-label">Cloud Content</div></div>
+      </div>
+
+      <h2>Architecture & Tech Stack</h2>
+      <p>The application is built on three independent layers that communicate cleanly:</p>
+      <ul>
+        <li><strong>AR Layer</strong> — Google AR Core handles plane detection, image marker tracking, and 3D anchor placement using the device camera</li>
+        <li><strong>Content Layer</strong> — Firebase Realtime Database stores model URLs and lesson metadata; models are fetched and cached on first load</li>
+        <li><strong>UI Layer</strong> — Standard Android Views for navigation, custom OpenGL ES rendering pipeline for the AR overlays</li>
+      </ul>
+
+      <h3>Core AR Session Setup</h3>
+      <pre><code>ArSession session = new ArSession(this);
+Config config = new Config(session);
+config.setUpdateMode(Config.UpdateMode.LATEST_CAMERA_IMAGE);
+config.setAugmentedImageDatabase(buildImageDatabase(session));
+session.configure(config);
+
+// Track image anchors in the render loop
+for (AugmentedImage img : frame.getUpdatedTrackables(AugmentedImage.class)) {
+  if (img.getTrackingState() == TRACKING) {
+    renderModelAtAnchor(img.createAnchor(img.getCenterPose()));
+  }
+}</code></pre>
+
+      <h2>Firebase Content Delivery</h2>
+      <p>Rather than bundling 3D assets with the APK (which would inflate the install size), models are stored in Firebase Storage and referenced by the Realtime Database. This keeps the app lightweight and allows content to be updated without a new release.</p>
+      <pre><code>FirebaseDatabase.getInstance()
+  .getReference("lessons")
+  .child(imageMarkerId)
+  .addListenerForSingleValueEvent(new ValueEventListener() {
+    public void onDataChange(DataSnapshot snap) {
+      String modelUrl = snap.child("model_url").getValue(String.class);
+      ModelLoader.load(modelUrl, anchor -> renderAnchor(anchor));
+    }
+  });</code></pre>
+
+      <div class="callout">
+        <div class="callout-title">⚠️ Key Learning</div>
+        Handling <code>UnavailableArcoreNotInstalledException</code> gracefully is critical — AR Core requires a separate install on devices running Android 8.0 and below. This was missed in early testing and cost two days of debugging on a lab device.
+      </div>
+
+      <h2>Results & Reflection</h2>
+      <p>The application was deployed to a small cohort of students during testing. Feedback showed that <strong>3D model interaction reduced average concept re-study time by ~40%</strong> for spatial topics compared to textbook-only learning.</p>
+      <p>Looking back, I would make three changes: use <strong>Kotlin</strong> for null safety, add <strong>offline model caching</strong> using Room DB, and write <strong>instrumented UI tests</strong> for the AR session lifecycle — the riskiest code path had zero coverage.</p>
+    `
+  },
+
+  'proj-2': {
+    num: '02', cat: 'dev', catLabel: 'Software Engineering',
+    title: 'Contemporary Guidelines Based AEGIS Mechanism for Gateway',
+    year: '2023', status: 'Academic Project',
+    tags: ['Java','J2EE','MySQL','AES Encryption','Servlet','JSP'],
+    lead: 'A compliance-driven gateway security system that enforces contemporary security guidelines, performs real-time threat detection, and manages access control across networked entry points.',
+    prev: 'proj-1', next: 'proj-3',
+    prevTitle: 'AR Learning App', nextTitle: 'E-Commerce Automation',
+    body: `
+      <h2>Why Gateway Security Matters</h2>
+      <p>Network gateways are the single chokepoint through which all traffic flows — making them both the best place to enforce security policies and the most catastrophic point of failure if left unprotected. This project designed and implemented a <strong>rules-based security mechanism</strong> for gateway systems, inspired by modern compliance frameworks like ISO 27001 and NIST CSF.</p>
+
+      <div class="highlight-box">
+        <div class="highlight-item"><div class="highlight-num">AES-256</div><div class="highlight-label">Encryption Standard</div></div>
+        <div class="highlight-item"><div class="highlight-num">Real-time</div><div class="highlight-label">Threat Detection</div></div>
+        <div class="highlight-item"><div class="highlight-num">RBAC</div><div class="highlight-label">Access Control</div></div>
+      </div>
+
+      <h2>System Architecture</h2>
+      <p>The AEGIS system is structured around three core modules:</p>
+      <ul>
+        <li><strong>Policy Engine</strong> — Reads and enforces configurable security rules from a MySQL policy store. Rules can be updated at runtime without restarting the gateway service.</li>
+        <li><strong>Inspection Layer</strong> — Intercepts incoming requests via a J2EE Servlet filter chain, applying rate limiting, IP blacklisting, and payload inspection.</li>
+        <li><strong>Audit Trail</strong> — All access decisions (allow/deny) are logged to an append-only audit table with timestamp, source IP, and matched policy rule.</li>
+      </ul>
+
+      <h3>Policy Enforcement Filter</h3>
+      <pre><code>@WebFilter("/*")
+public class AegisFilter implements Filter {
+  public void doFilter(ServletRequest req, ServletResponse res,
+                       FilterChain chain) throws IOException, ServletException {
+    HttpServletRequest request = (HttpServletRequest) req;
+    String clientIp = request.getRemoteAddr();
+    String path     = request.getRequestURI();
+
+    PolicyDecision decision = policyEngine.evaluate(clientIp, path);
+    auditLogger.log(clientIp, path, decision);
+
+    if (decision == PolicyDecision.DENY) {
+      ((HttpServletResponse) res).sendError(403, "Access denied by AEGIS policy");
+      return;
+    }
+    chain.doFilter(req, res);
+  }
+}</code></pre>
+
+      <h2>Encryption Implementation</h2>
+      <p>All sensitive data transmitted through the gateway — session tokens, credentials, policy configurations — is encrypted using <strong>AES-256 in GCM mode</strong>. GCM provides both confidentiality and integrity verification, detecting any tampering with ciphertext in transit.</p>
+
+      <h2>Outcomes</h2>
+      <p>The system successfully blocked 100% of simulated attack vectors in lab testing including SQL injection, brute-force login attempts, and unauthorized path traversal. The policy engine processed gateway decisions in <strong>under 4ms average latency</strong>, making it viable for production gateway deployment.</p>
+    `
+  },
+
+  'proj-3': {
+    num: '03', cat: 'qa', catLabel: 'QA / Testing',
+    title: 'E-Commerce Website Automation Testing',
+    year: '2026', status: 'Professional',
+    tags: ['Selenium WebDriver','TestNG','Gradle','Git','Page Object Model','Chrome Driver'],
+    lead: 'End-to-end automation testing suite for a live eCommerce platform, covering the full purchase funnel from product discovery to order confirmation — with repeatable, zero-touch regression runs on every deployment.',
+    prev: 'proj-2', next: 'proj-4',
+    prevTitle: 'AEGIS Security Mechanism', nextTitle: 'Security Audit Suite',
+    body: `
+      <h2>The Testing Challenge</h2>
+      <p>Manual regression testing of an eCommerce platform before each release was taking <strong>6+ hours</strong>. With deployments happening multiple times per week, this was unsustainable. The goal was to automate the critical purchase funnel so each deployment could be verified in under 20 minutes.</p>
+
+      <div class="highlight-box">
+        <div class="highlight-item"><div class="highlight-num">85%</div><div class="highlight-label">Coverage of Critical Paths</div></div>
+        <div class="highlight-item"><div class="highlight-num">18 min</div><div class="highlight-label">Full Regression Runtime</div></div>
+        <div class="highlight-item"><div class="highlight-num">40+</div><div class="highlight-label">Automated Test Cases</div></div>
+      </div>
+
+      <h2>Framework Architecture</h2>
+      <p>The suite is built on the <strong>Page Object Model (POM)</strong> pattern, separating locator logic from test logic. This means UI changes only require updating the relevant Page class — not hunting through dozens of test methods.</p>
+      <pre><code>// Page Object: ProductPage.java
+public class ProductPage {
+  @FindBy(id = "add-to-cart-btn")
+  private WebElement addToCartButton;
+
+  @FindBy(css = ".product-title h1")
+  private WebElement productTitle;
+
+  public void addToCart() {
+    wait.until(ExpectedConditions.elementToBeClickable(addToCartButton));
+    addToCartButton.click();
+  }
+
+  public String getProductTitle() {
+    return productTitle.getText();
+  }
+}
+
+// Test: CheckoutFlowTest.java
+@Test(groups = "regression", priority = 1)
+public void completeCheckoutFlow() {
+  homePage.searchProduct("laptop");
+  ProductPage product = homePage.selectFirstResult();
+  product.addToCart();
+  CartPage cart = product.goToCart();
+  cart.proceedToCheckout();
+  Assert.assertTrue(confirmationPage.isOrderConfirmed(),
+    "Order confirmation not shown after checkout");
+}</code></pre>
+
+      <h2>Test Coverage</h2>
+      <p>The automation suite covers five critical user journeys:</p>
+      <ul>
+        <li>Product search and filter combinations</li>
+        <li>Product detail page — image gallery, size/variant selection</li>
+        <li>Cart management — add, remove, quantity update</li>
+        <li>Checkout flow — address entry, shipping selection, payment</li>
+        <li>Order confirmation — email trigger validation, order ID generation</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-title">📌 Decision: What NOT to Automate</div>
+        Visual layout checks, new features still in active development, and one-time data migrations were kept manual. Automating unstable UI elements costs more in maintenance than it saves in testing time.
+      </div>
+
+      <h2>Results</h2>
+      <p>Regression time dropped from 6 hours to 18 minutes. Three regressions that would have shipped to production were caught by the automated suite before deployment, including a broken coupon code validation that affected 12% of checkout sessions.</p>
+    `
+  },
+
+  'proj-4': {
+    num: '04', cat: 'qa', catLabel: 'QA / Testing',
+    title: 'Security Audit Suite',
+    year: '2026', status: 'Professional',
+    tags: ['Burp Suite Pro','OWASP ZAP','Postman','Python','OWASP Top 10','CVE Reporting'],
+    lead: 'A comprehensive penetration testing engagement identifying 200+ vulnerabilities across web application endpoints — resulting in full OWASP Top 10 compliance and a hardened security posture pre-launch.',
+    prev: 'proj-3', next: 'proj-5',
+    prevTitle: 'E-Commerce Automation', nextTitle: 'E-Commerce Content Strategy',
+    body: `
+      <h2>Engagement Scope</h2>
+      <p>The audit covered a full-stack web application (Java backend, Angular frontend) scheduled for public launch. The brief: find everything exploitable before attackers do. Three weeks, one application, zero prior security assessment history.</p>
+
+      <div class="highlight-box">
+        <div class="highlight-item"><div class="highlight-num">214</div><div class="highlight-label">Issues Filed</div></div>
+        <div class="highlight-item"><div class="highlight-num">23</div><div class="highlight-label">Critical / High Severity</div></div>
+        <div class="highlight-item"><div class="highlight-num">100%</div><div class="highlight-label">OWASP Top 10 Coverage</div></div>
+      </div>
+
+      <h2>Methodology</h2>
+      <p>The audit followed a structured attack simulation approach, moving through reconnaissance, mapping, vulnerability scanning, manual exploitation, and reporting.</p>
+
+      <h3>Phase 1 — Automated Scanning</h3>
+      <p>Burp Suite's active scanner identified 60% of findings automatically. OWASP ZAP was run in parallel as a cross-validation tool. All scanner findings were triaged manually before filing to eliminate false positives.</p>
+
+      <h3>Phase 2 — Manual API Testing</h3>
+      <p>Every API endpoint documented in the application was tested in Postman for authentication bypass, parameter tampering, and IDOR (Insecure Direct Object References). A script cycled through sequential resource IDs to identify access control gaps:</p>
+      <pre><code># IDOR detection — sequential ID enumeration
+import requests
+
+SESSION_TOKEN = "eyJhbGc..."  # authenticated user token
+for order_id in range(10000, 10200):
+  r = requests.get(
+    f"https://target.app/api/orders/{order_id}",
+    headers={"Authorization": f"Bearer {SESSION_TOKEN}"}
+  )
+  if r.status_code == 200:
+    print(f"IDOR: Order {order_id} accessible — {r.json()['user_email']}")</code></pre>
+
+      <h3>Top Findings</h3>
+      <ul>
+        <li><strong>CRITICAL</strong> — SQL injection in the product search endpoint. Unsanitized user input passed directly to a raw SQL query.</li>
+        <li><strong>HIGH</strong> — Broken access control on admin API routes. Authenticated non-admin users could access <code>/api/admin/users</code> by knowing the URL.</li>
+        <li><strong>HIGH</strong> — Session tokens not invalidated on logout. Stolen tokens remained valid for 24 hours after logout.</li>
+        <li><strong>MEDIUM</strong> — Sensitive data (email, phone) returned in API responses even when the field was not requested.</li>
+      </ul>
+
+      <h2>Reporting Approach</h2>
+      <p>Every finding was documented with: a one-line impact summary, a step-by-step reproduction case, a severity rating (CVSS v3 score), and a specific remediation recommendation. Developers received a structured JSON export they could import directly into their issue tracker.</p>
+
+      <h2>Post-Remediation</h2>
+      <p>A re-test after developer fixes confirmed all 23 critical/high findings were resolved. The application achieved OWASP Top 10 compliance and launched on schedule with a clean security posture.</p>
+    `
+  },
+
+  'proj-5': {
+    num: '05', cat: 'con', catLabel: 'Content Creation',
+    title: 'E-Commerce Content Strategy',
+    year: '2026', status: 'Professional',
+    tags: ['Product Copywriting','SEO','Google Analytics','A/B Testing','Conversion Optimization'],
+    lead: 'A full-funnel content strategy for an eCommerce platform — covering product descriptions, campaign messaging, SEO architecture, and conversion-optimized copy that measurably improved sales metrics.',
+    prev: 'proj-4', next: 'proj-6',
+    prevTitle: 'Security Audit Suite', nextTitle: 'India E-Commerce Content',
+    body: `
+      <h2>Content as a Product</h2>
+      <p>Most eCommerce teams treat product descriptions as an afterthought — templated, generic, and written to fill a form field rather than sell a product. This engagement started from the position that <strong>content is a product surface</strong> with measurable conversion impact, and treated it accordingly.</p>
+
+      <div class="highlight-box">
+        <div class="highlight-item"><div class="highlight-num">300+</div><div class="highlight-label">Descriptions Written</div></div>
+        <div class="highlight-item"><div class="highlight-num">+22%</div><div class="highlight-label">Avg. CTR Improvement</div></div>
+        <div class="highlight-item"><div class="highlight-num">Top 3</div><div class="highlight-label">SEO Rankings Achieved</div></div>
+      </div>
+
+      <h2>The Content Framework</h2>
+      <p>Every product description was structured around a five-element framework:</p>
+      <ul>
+        <li><strong>Hook</strong> — Lead with the primary benefit, not the product name. "Lasts 2 full days" beats "5000mAh battery".</li>
+        <li><strong>Problem-Solution</strong> — Name the problem the buyer has before stating how the product solves it.</li>
+        <li><strong>Proof</strong> — Specific numbers, certifications, or social proof. Vague superlatives ("best quality") are conversion killers.</li>
+        <li><strong>Urgency/Relevance</strong> — Seasonal tie-ins, limited stock signals, or trending context where authentic.</li>
+        <li><strong>Trust Close</strong> — Return policy, warranty, and authentic review count near the CTA.</li>
+      </ul>
+
+      <h2>SEO Architecture</h2>
+      <p>Product pages were mapped to a three-tier keyword hierarchy: primary (high volume, transactional), secondary (long-tail buyer-intent), and semantic (related concepts for topical authority). Title tags, H1s, meta descriptions, and alt text were systematically optimized across the catalogue.</p>
+
+      <div class="callout">
+        <div class="callout-title">📊 A/B Test Finding</div>
+        Descriptions leading with a quantified benefit ("Charges to 80% in 35 minutes") outperformed feature-led descriptions ("65W fast charging support") by 18% in add-to-cart rate across a 2-week test on 40 product pages.
+      </div>
+
+      <h2>Campaign Content</h2>
+      <p>Beyond product descriptions, the engagement covered discount campaign messaging for seasonal sales events — flash sale banners, email subject lines, push notification copy, and category page headers. Each campaign asset was written to a consistent brand voice guide developed at the start of the engagement.</p>
+    `
+  },
+
+  'proj-6': {
+    num: '06', cat: 'con', catLabel: 'Content Creation',
+    title: 'India-Focused E-Commerce Content Development',
+    year: '2026', status: 'Professional',
+    tags: ['Indian Consumer Research','Hinglish SEO','Cultural Copywriting','Seasonal Campaigns','Price Psychology'],
+    lead: 'Culturally-tuned product content for the Indian eCommerce market — built on local consumer insights, regional search behaviour, trust signals unique to Indian buyers, and festival-driven seasonal strategy.',
+    prev: 'proj-5', next: null,
+    prevTitle: 'E-Commerce Content Strategy', nextTitle: '',
+    body: `
+      <h2>The Indian Market Is Not a Subset</h2>
+      <p>One of the most common mistakes in Indian eCommerce is treating the market as "Asia-Pacific with a discount." Indian consumers have <strong>distinct buying triggers, trust signals, and price psychology</strong> that require purpose-built content — not translated global copy.</p>
+      <p>This project built a content playbook grounded in local consumer research and applied it across 200+ product pages, campaign assets, and category descriptions.</p>
+
+      <div class="highlight-box">
+        <div class="highlight-item"><div class="highlight-num">200+</div><div class="highlight-label">Product Pages</div></div>
+        <div class="highlight-item"><div class="highlight-num">12</div><div class="highlight-label">Festival Campaigns</div></div>
+        <div class="highlight-item"><div class="highlight-num">5 States</div><div class="highlight-label">Regional Variants</div></div>
+      </div>
+
+      <h2>Key Consumer Insights Applied</h2>
+
+      <h3>1. Trust Before Transaction</h3>
+      <p>Indian online shoppers — especially first-time category buyers — need to trust the seller before the product. Content that prominently features <strong>BIS certifications, ISI marks, brand authorisation, and verified seller badges</strong> consistently outperforms content that leads with product features.</p>
+
+      <h3>2. EMI Mention in Description</h3>
+      <p>EMI options mentioned in the product description body (not just the price widget) reduce sticker-shock for high-ticket items. The phrasing "₹499/month — No Cost EMI available" in the first paragraph measurably reduces cart abandonment on items above ₹5,000.</p>
+
+      <h3>3. Hinglish Search Behaviour</h3>
+      <p>High-intent queries in India often mix Hindi and English naturally: "best smartphone 15000 mein", "geyser for bathroom", "kapde dhone ki machine". Content and meta tags were optimised for these hybrid patterns alongside standard English keywords.</p>
+
+      <h3>4. Festival Calendar Integration</h3>
+      <p>Indian eCommerce spikes sharply around 12+ annual festivals — Diwali, Dussehra, Pongal, Eid, Christmas, and regional variations. Product descriptions and category headers were written with seasonal variant modules that could be activated per campaign without rewriting the core copy.</p>
+
+      <div class="callout">
+        <div class="callout-title">💡 Regional Finding</div>
+        Product descriptions for South Indian markets (Tamil Nadu, Kerala, Karnataka) that referenced local use cases — "ideal for Chennai summers", "handles hard water common in Bengaluru" — saw 31% higher engagement than generic national copy for the same SKUs.
+      </div>
+
+      <h2>Content Operations Outcome</h2>
+      <p>The playbook was documented and handed off as a reusable content guide — enabling the internal team to apply the same principles to new product categories without external support. The festival campaign templates reduced new campaign briefing time from 3 days to 4 hours.</p>
+    `
+  }
+};
+
+/* ── Cursor ── */
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursorRing');
+if (window.matchMedia('(hover: hover)').matches) {
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = (e.clientX - 5) + 'px';
+    cursor.style.top  = (e.clientY - 5) + 'px';
+    ring.style.left   = (e.clientX - 18) + 'px';
+    ring.style.top    = (e.clientY - 18) + 'px';
+  });
+  document.querySelectorAll('a, button, .work-card').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2)'; ring.style.transform = 'scale(1.5)'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; });
+  });
+}
+
+/* ── Hamburger ── */
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('.mobile-nav-link').forEach(l => {
+  l.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+/* ── Scroll Reveal ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+/* ── Filter ── */
+function applyFilter(filter) {
+  const cards  = document.querySelectorAll('.work-card');
+  const groups = document.querySelectorAll('.category-group');
+  let total = 0;
+
+  groups.forEach(group => {
+    const groupCat = group.id.replace('group-', '');
+    const visible  = filter === 'all' || groupCat === filter;
+    group.classList.toggle('hidden', !visible);
+    if (visible) total++;
+  });
+
+  cards.forEach(card => {
+    const match = filter === 'all' || card.dataset.cat === filter;
+    card.classList.toggle('hidden', !match);
+  });
+
+  document.getElementById('noResults').classList.toggle('visible', total === 0);
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+});
+
+/* ── Project Overlay ── */
+const overlay       = document.getElementById('projectOverlay');
+const projectDetail = document.getElementById('projectDetail');
+const progressFill  = document.getElementById('progressFill');
+
+function buildProjectHTML(proj) {
+  const catColorMap = { dev: 'cat-dev', qa: 'cat-qa', con: 'cat-con' };
+  const catStyleMap = {
+    dev: 'background:rgba(200,255,0,0.1);color:var(--accent1)',
+    qa:  'background:rgba(255,59,110,0.1);color:var(--accent2)',
+    con: 'background:rgba(0,212,255,0.1);color:var(--accent3)'
+  };
+  const accentMap = { dev: 'var(--accent1)', qa: 'var(--accent2)', con: 'var(--accent3)' };
+  const accent = accentMap[proj.cat];
+
+  const tagsHTML = proj.tags.map(t => `<span class="project-footer-tag">${t}</span>`).join('');
+  const metaTagsHTML = proj.tags.map(t => `<div class="meta-tag">${t}</div>`).join('');
+
+  const prevBtn = proj.prev
+    ? `<a href="#" class="project-nav-btn" data-project="${proj.prev}">
+        <div class="project-nav-dir">← Previous</div>
+        <div class="project-nav-title">${proj.prevTitle}</div>
+       </a>`
+    : `<div></div>`;
+
+  const nextBtn = proj.next
+    ? `<a href="#" class="project-nav-btn next" data-project="${proj.next}">
+        <div class="project-nav-dir">Next →</div>
+        <div class="project-nav-title">${proj.nextTitle}</div>
+       </a>`
+    : `<div></div>`;
+
+  return `
+    <div class="project-hero-area">
+      <div>
+        <div class="project-num">Project ${proj.num}</div>
+        <span class="project-category-badge" style="${catStyleMap[proj.cat]}">${proj.catLabel}</span>
+        <h1 class="project-title-large">${proj.title}</h1>
+        <div class="project-lead" style="border-left-color:${accent}">${proj.lead}</div>
+      </div>
+      <div class="project-meta-box">
+        <div class="meta-item">
+          <div class="meta-label">Year</div>
+          <div class="meta-value">${proj.year}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Type</div>
+          <div class="meta-value">${proj.catLabel}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Status</div>
+          <div class="meta-value">${proj.status}</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Technologies</div>
+          <div class="meta-tags">${metaTagsHTML}</div>
+        </div>
+      </div>
+    </div>
+    <div class="project-body">${proj.body}</div>
+    <div class="project-footer">
+      <div class="project-footer-tags">${tagsHTML}</div>
+      <div class="project-nav-row">
+        ${prevBtn}
+        ${nextBtn}
+      </div>
+    </div>
+  `;
+}
+
+function openProject(projId) {
+  const proj = PROJECTS[projId];
+  if (!proj) return;
+  projectDetail.innerHTML = buildProjectHTML(proj);
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  overlay.scrollTop = 0;
+  progressFill.style.width = '0%';
+  history.pushState({ project: projId }, '', '#' + projId);
+
+  // Wire up prev/next inside overlay
+  projectDetail.querySelectorAll('[data-project]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      openProject(btn.dataset.project);
+    });
+  });
+}
+
+function closeProject() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  history.pushState({}, '', window.location.pathname);
+}
+
+// Open on card click
+document.querySelectorAll('.work-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const projId = card.dataset.project;
+    if (projId) openProject(projId);
+  });
+});
+
+document.getElementById('overlayBack').addEventListener('click', closeProject);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProject(); });
+window.addEventListener('popstate', e => { if (!e.state || !e.state.project) closeProject(); });
+
+// Reading progress
+overlay.addEventListener('scroll', () => {
+  const scrollable = overlay.scrollHeight - overlay.clientHeight;
+  progressFill.style.width = scrollable > 0 ? (overlay.scrollTop / scrollable * 100) + '%' : '0%';
+});
+
+// Handle direct URL hash
+if (window.location.hash) {
+  const hash = window.location.hash.slice(1);
+  if (PROJECTS[hash]) setTimeout(() => openProject(hash), 300);
+}
+</script>
+</body>
+</html>

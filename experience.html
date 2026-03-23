@@ -359,7 +359,7 @@ nav{
   transition:transform .4s;
 }
 .cert-card:hover::before{transform:scaleX(1);}
-.cert-num{font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:rgba(200,255,0,1.0);line-height:1;margin-bottom:.75rem;}
+.cert-num{font-family:'Fraunces',serif;font-size:2rem;font-weight:700;line-height:1;margin-bottom:.75rem;}.cert-num.n1{color:var(--accent1);}.cert-num.n2{color:var(--accent3);}.cert-num.n3{color:var(--accent2);}.cert-num.n4{color:var(--accent1);}
 .cert-name{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;margin-bottom:.4rem;line-height:1.3;}
 .cert-issuer{font-size:.62rem;color:var(--text-dim);margin-bottom:.3rem;}
 .cert-year{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent1);}
@@ -516,6 +516,71 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:2.5
   .highlight-box{grid-template-columns:1fr;}
   .cert-grid{grid-template-columns:1fr;}
 }
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem;
+  height: 60px;
+  background: rgba(10,10,15,0.96);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: 1.05rem; letter-spacing: -0.02em;
+  color: var(--text); text-decoration: none; flex-shrink: 0;
+}
+.nav-logo span { color: var(--accent1); }
+.nav-links {
+  display: flex; gap: 0; list-style: none;
+  position: absolute; left: 50%; transform: translateX(-50%);
+}
+.nav-links a {
+  color: var(--text-dim); text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0 0.75rem; height: 60px;
+  display: flex; align-items: center;
+  position: relative; transition: color 0.2s;
+  white-space: nowrap;
+}
+.nav-links a::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0.75rem; right: 0.75rem;
+  height: 2px; background: var(--accent1);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform 0.25s ease;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--text); }
+.nav-links a.active::after { transform: scaleX(1); }
+.nav-status {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem; letter-spacing: 0.1em;
+  color: var(--text-dim); flex-shrink: 0;
+}
+.status-dot {
+  width: 7px; height: 7px;
+  background: var(--accent1); border-radius: 50%;
+  box-shadow: 0 0 6px var(--accent1);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.7);} }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+.mobile-menu { display: none; position: fixed; inset: 0; z-index: 290; background: rgba(10,10,15,.98); backdrop-filter: blur(20px); flex-direction: column; align-items: center; justify-content: center; gap: .5rem; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(1.6rem,7vw,2.2rem); color: var(--text-dim); text-decoration: none; text-transform: uppercase; padding: .4rem 1rem; transition: color .2s; letter-spacing: -.01em; }
+.mobile-menu a:hover, .mobile-menu a.active { color: var(--accent1); }
+.mobile-menu-footer { position: absolute; bottom: 2rem; font-size: .62rem; color: var(--text-dim); letter-spacing: .15em; }
+@media (max-width: 1200px) { .nav-status { display: none; } }
+@media (max-width: 960px)  { .nav-links { display: none; } .hamburger { display: flex; } }
 </style>
 </head>
 <body>
@@ -528,11 +593,14 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:2.5
 <!-- ══ NAV ══ -->
 <nav>
   <a href="index.html" class="nav-logo">Yuvaraj<span>.</span>Pandian</a>
-  <ul class="nav-links">
+    <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="works.html">Works</a></li>
     <li><a href="experience.html" class="active">Experience</a></li>
     <li><a href="study.html">Study</a></li>
+    <li><a href="problemsolving.html">Problem Solving</a></li>
+    <li><a href="techstack.html">Tech Stack</a></li>
+    <li><a href="currentlybuilding.html">Under Development</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="index.html#contact">Contact</a></li>
   </ul>
@@ -543,11 +611,15 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:2.5
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html">Home</a>
   <a href="works.html">Works</a>
-  <a href="experience.html">Experience</a>
+  <a href="experience.html" class="active">Experience</a>
   <a href="study.html">Study</a>
+  <a href="problemsolving.html">Problem Solving</a>
+  <a href="techstack.html">Tech Stack</a>
+  <a href="currentlybuilding.html">Under Development</a>
   <a href="blog.html">Blog</a>
   <a href="index.html#contact">Contact</a>
   <div class="mobile-menu-footer">Eager to Contribute &amp; Grow ●</div>
+</div>
 </div>
 
 <!-- ══ HERO ══ -->
@@ -735,11 +807,11 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:2.5
         </div>
         <div class="skill-list">
           <div class="skill-row">
-            <div class="skill-row-top"><span class="skill-name">Java (Core + J2EE + Advance)</span><span class="skill-pct">90%</span></div>
+            <div class="skill-row-top"><span class="skill-name">Java (Core + J2EE)</span><span class="skill-pct">85%</span></div>
             <div class="skill-bar-bg"><div class="skill-bar-fill c1" data-width="85"></div></div>
           </div>
           <div class="skill-row">
-            <div class="skill-row-top"><span class="skill-name">JavaScript</span><span class="skill-pct">65%</span></div>
+            <div class="skill-row-top"><span class="skill-name">Angular</span><span class="skill-pct">65%</span></div>
             <div class="skill-bar-bg"><div class="skill-bar-fill c1" data-width="65"></div></div>
           </div>
           <div class="skill-row">
@@ -827,7 +899,7 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:2.5
         <div class="tools-grid">
           <span class="tool-chip">Git / GitHub</span>
           <span class="tool-chip">Gradle</span>
-          <span class="tool-chip">Eclipse</span>
+          <span class="tool-chip">IntelliJ IDEA</span>
           <span class="tool-chip">VS Code</span>
           <span class="tool-chip">Postman</span>
           <span class="tool-chip">Burp Suite</span>
@@ -836,7 +908,7 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:2.5
           <span class="tool-chip">Android Studio</span>
           <span class="tool-chip">Google AR Core</span>
           <span class="tool-chip">Google Analytics</span>
-          <span class="tool-chip">AI Tools </span>
+          <span class="tool-chip">AI Tools (Be10X)</span>
         </div>
       </div>
 
@@ -884,28 +956,28 @@ footer{background:var(--surface2);border-top:1px solid var(--border);padding:2.5
     </div>
     <div class="cert-grid">
       <div class="cert-card reveal">
-        <div class="cert-num">01</div>
+        <div class="cert-num n1">01</div>
         <div class="cert-name">Core Java Certified</div>
         <div class="cert-issuer">Apollo Computers</div>
         <div class="cert-year">2021</div>
       </div>
       <div class="cert-card reveal reveal-delay-1">
-        <div class="cert-num">02</div>
-        <div class="cert-name">Java Software Developer</div>
-        <div class="cert-issuer">Shiash Info Solutions</div>
-        <div class="cert-year">2023</div>
+        <div class="cert-num n2">02</div>
+        <div class="cert-name">AI Tools Certification</div>
+        <div class="cert-issuer">Be10X</div>
+        <div class="cert-year">2025</div>
       </div>
       <div class="cert-card reveal reveal-delay-2">
-        <div class="cert-num">03</div>
+        <div class="cert-num n3">03</div>
         <div class="cert-name">Multimodal AI</div>
         <div class="cert-issuer">Global Techno Solutions</div>
         <div class="cert-year">2025</div>
       </div>
       <div class="cert-card reveal reveal-delay-3">
-        <div class="cert-num">04</div>
-        <div class="cert-name">AI Tools Certification</div>
-        <div class="cert-issuer">Be10X</div>
-        <div class="cert-year">2025</div>
+        <div class="cert-num n4">04</div>
+        <div class="cert-name">Java Software Developer</div>
+        <div class="cert-issuer">Shiash Info Solutions</div>
+        <div class="cert-year">2023</div>
       </div>
     </div>
 
@@ -967,7 +1039,7 @@ const ROLES = {
     ],
     tags: ['Java','Angular','PHP','Selenium','TestNG','Gradle','Content Writing','SEO','eCommerce'],
     lead: 'A multi-disciplinary role at a growing eCommerce startup where one person does the work of three — building backend systems by day, writing automation test suites by afternoon, and crafting product descriptions that actually convert.',
-    meta: { Location: 'Chennai, TN', Type: 'Full-time', Duration: '3+ Months', Sector: 'eCommerce / Tech' },
+    meta: { Location: 'Chennai, TN', Type: 'Full-time', Duration: '6+ Months', Sector: 'eCommerce / Tech' },
     body: `
       <h2>The Role in Context</h2>
       <p>Tradesala Technologies is a Chennai-based eCommerce startup building a homegrown marketplace platform. As an Associate Trainee, my work spans three entirely different disciplines simultaneously — a deliberate arrangement designed to give early-career engineers holistic exposure to how digital products actually get made and sold.</p>

@@ -390,9 +390,9 @@ footer { background:var(--surface2); border-top:1px solid var(--border); padding
     <li><a href="works.html">Works</a></li>
     <li><a href="experience.html">Experience</a></li>
     <li><a href="study.html">Study</a></li>
-    <li><a href="problemsolving.html">Problemsolving</a></li>
-    <li><a href="techstack.html">Techstack</a></li>
-    <li><a href="underdevelopment.html">Underdevelopment</a></li>
+    <li><a href="problem-solving.html">Problem-Solving</a></li>
+    <li><a href="tech-stack.html">Tech Stack</a></li>
+    <li><a href="currently-building.html">Building</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
@@ -404,9 +404,9 @@ footer { background:var(--surface2); border-top:1px solid var(--border); padding
   <a href="works.html">Works</a>
   <a href="experience.html">Experience</a>
   <a href="study.html">Study</a>
-  <a href="problemsolving.html">Problemsolving</a>
-  <a href="techstack.html">Techstack</a>
-  <a href="underdevelopment.html">Underdevelopment</a>
+  <a href="problem-solving.html">Problem-Solving</a>
+  <a href="tech-stack.html">Tech Stack</a>
+  <a href="currently-building.html">Building</a>
   <a href="blog.html">Blog</a>
   <a href="contact.html" class="active">Contact</a>
   <div class="mobile-menu-footer">Eager to Contribute &amp; Grow ●</div>
@@ -424,7 +424,7 @@ footer { background:var(--surface2); border-top:1px solid var(--border); padding
     </div>
     <div class="hero-float-card">
       <div class="hfc-icon">📬</div>
-      <div><div class="hfc-label">Email</div><div class="hfc-val">yuvarajpandian243@gmail.com</div></div>
+      <div><div class="hfc-label">Email</div><div class="hfc-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1b626e6d7a697a716b7a757f727a75292f285b7c767a727735787476">[email&#160;protected]</a></div></div>
     </div>
     <div class="hero-float-card">
       <div class="hfc-icon">🕐</div>
@@ -477,7 +477,7 @@ footer { background:var(--surface2); border-top:1px solid var(--border); padding
             <div class="detail-icon">📬</div>
             <div>
               <div class="detail-key">Email</div>
-              <div class="detail-val"><a href="mailto:yuvarajpandian243@gmail.com">yuvarajpandian243@gmail.com</a></div>
+              <div class="detail-val"><a href="/cdn-cgi/l/email-protection#c6bfb3b0a7b4a7acb6a7a8a2afa7a8f4f2f586a1aba7afaae8a5a9ab"><span class="__cf_email__" data-cfemail="cfb6bab9aebdaea5bfaea1aba6aea1fdfbfc8fa8a2aea6a3e1aca0a2">[email&#160;protected]</span></a></div>
             </div>
           </div>
           <div class="detail-row">
@@ -704,7 +704,7 @@ footer { background:var(--surface2); border-top:1px solid var(--border); padding
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── Cursor ── */
 const cursor = document.getElementById('cursor');
 const ring   = document.getElementById('cursorRing');
@@ -759,69 +759,92 @@ setInterval(updateTime, 10000);
 /* ── Contact Form ── */
 document.getElementById('cfSubmitBtn').addEventListener('click', () => {
   const fname   = document.getElementById('cf-fname').value.trim();
+  const lname   = document.getElementById('cf-lname').value.trim();
   const email   = document.getElementById('cf-email').value.trim();
+  const company = document.getElementById('cf-company').value.trim();
   const subject = document.getElementById('cf-subject').value.trim();
   const message = document.getElementById('cf-message').value.trim();
+  const enquiry = document.querySelector('input[name="enquiry"]:checked')?.value || 'General';
   const btn     = document.getElementById('cfSubmitBtn');
   const note    = document.getElementById('formNote');
   const noteIcon= document.getElementById('formNoteIcon');
   const noteText= document.getElementById('formNoteText');
 
-  // Basic validation
-  if (!fname || !email || !subject || !message) {
-    btn.textContent = 'Please fill required fields ✗';
-    btn.className = 'form-submit error';
+  function showNote(icon, text) {
     note.style.display = 'flex';
-    noteIcon.textContent = '⚠️';
-    noteText.textContent = 'First name, email, subject, and message are required.';
-    setTimeout(() => {
-      btn.textContent = 'Send Message →';
-      btn.className = 'form-submit';
-      note.style.display = 'none';
-    }, 3000);
+    noteIcon.textContent = icon;
+    noteText.textContent = text;
+  }
+  function resetBtn() {
+    btn.textContent = 'Send Message →';
+    btn.className = 'form-submit';
+    btn.disabled = false;
+    note.style.display = 'none';
+  }
+
+  /* ── Validation ── */
+  if (!fname || !email || !subject || !message) {
+    btn.textContent = 'Fill required fields ✗';
+    btn.className = 'form-submit error';
+    showNote('⚠️', 'First name, email, subject and message are required.');
+    setTimeout(resetBtn, 3000);
     return;
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    btn.textContent = 'Invalid email address ✗';
+  if (!email.includes('@') || !email.includes('.')) {
+    btn.textContent = 'Invalid email ✗';
     btn.className = 'form-submit error';
-    note.style.display = 'flex';
-    noteIcon.textContent = '⚠️';
-    noteText.textContent = 'Please enter a valid email address.';
-    setTimeout(() => {
-      btn.textContent = 'Send Message →';
-      btn.className = 'form-submit';
-      note.style.display = 'none';
-    }, 3000);
+    showNote('⚠️', 'Please enter a valid email address.');
+    setTimeout(resetBtn, 3000);
     return;
   }
 
-  // Sending state
+  /* ── Sending state ── */
   btn.textContent = 'Sending…';
   btn.className = 'form-submit sending';
   btn.disabled = true;
+  note.style.display = 'none';
 
-  // Simulate send (replace with real backend/Formspree endpoint)
-  setTimeout(() => {
-    btn.textContent = 'Message Sent! ✓';
-    btn.className = 'form-submit success';
+  /* ── Your Cloudflare Workers API ── */
+  fetch('https://yuvarajpandian-api.yuvarajpandian243.workers.dev/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name:    fname + (lname ? ' ' + lname : ''),
+      email:   email,
+      company: company || null,
+      subject: subject,
+      enquiry: enquiry,
+      message: message,
+      source:  'contact-page',
+      sent_at: new Date().toISOString()
+    })
+  })
+  .then(res => {
     btn.disabled = false;
-    note.style.display = 'flex';
-    noteIcon.textContent = '✅';
-    noteText.textContent = `Thanks ${fname}! I'll reply to ${email} within 24 hours.`;
-
-    // Reset form fields
-    ['cf-fname','cf-lname','cf-email','cf-company','cf-subject','cf-message'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = '';
-    });
-    document.getElementById('type-job').checked = true;
-
-    setTimeout(() => {
-      btn.textContent = 'Send Message →';
-      btn.className = 'form-submit';
-      note.style.display = 'none';
-    }, 5000);
-  }, 1200);
+    if (res.ok) {
+      /* Success */
+      btn.textContent = 'Message Sent! ✓';
+      btn.className = 'form-submit success';
+      showNote('✅', 'Thanks ' + fname + '! I’ll reply to ' + email + ' within 24 hours.');
+      /* Reset fields */
+      ['cf-fname','cf-lname','cf-email','cf-company','cf-subject','cf-message'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      document.getElementById('type-job').checked = true;
+      setTimeout(resetBtn, 6000);
+    } else {
+      return res.text().then(t => { throw new Error(t || 'Server returned ' + res.status); });
+    }
+  })
+  .catch(err => {
+    btn.disabled = false;
+    btn.textContent = 'Failed — try again ✗';
+    btn.className = 'form-submit error';
+    showNote('⚠️', 'Could not send. Please email yuvarajpandian243@gmail.com directly.');
+    console.error('Contact form error:', err.message);
+    setTimeout(resetBtn, 5000);
+  });
 });
 </script>
 </body>

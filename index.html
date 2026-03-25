@@ -510,9 +510,9 @@ footer { background: var(--surface2); border-top: 1px solid var(--border); paddi
     <li><a href="works.html">Works</a></li>
     <li><a href="experience.html">Experience</a></li>
     <li><a href="study.html">Study</a></li>
-    <li><a href="problemsolving.html">Problemsolving</a></li>
-    <li><a href="techstack.html">Techstack</a></li>
-    <li><a href="underdevelopment.html">Underdevelopment</a></li>
+    <li><a href="problem-solving.html">Problem-Solving</a></li>
+    <li><a href="tech-stack.html">Tech Stack</a></li>
+    <li><a href="currently-building.html">Building</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
@@ -525,9 +525,9 @@ footer { background: var(--surface2); border-top: 1px solid var(--border); paddi
   <a href="works.html">Works</a>
   <a href="experience.html">Experience</a>
   <a href="study.html">Study</a>
-  <a href="problemsolving.html">Problemsolving</a>
-  <a href="techstack.html">Techstack</a>
-  <a href="underdevelopment.html">Underdevelopment</a>
+  <a href="problem-solving.html">Problem-Solving</a>
+  <a href="tech-stack.html">Tech Stack</a>
+  <a href="currently-building.html">Building</a>
   <a href="blog.html">Blog</a>
   <a href="contact.html">Contact</a>
   <div class="mobile-menu-footer">Eager to Contribute &amp; Grow ●</div>
@@ -551,7 +551,7 @@ footer { background: var(--surface2); border-top: 1px solid var(--border); paddi
   </p>
   <div class="hero-cta reveal reveal-delay-3">
     <a href="works.html" class="btn-primary">View My Work</a>
-    <a href="#contact" class="btn-secondary">Let's talk <span class="arrow">→</span></a>
+    <a href="contact.html" class="btn-secondary">Let's talk <span class="arrow">→</span></a>
   </div>
   <div class="hero-decoration">
     <div class="deco-box">
@@ -850,9 +850,12 @@ footer { background: var(--surface2); border-top: 1px solid var(--border); paddi
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-header">
-    <div class="section-eyebrow">Get in Touch</div>
-    <h2 class="section-title reveal">Let's <span class="italic">Connect</span></h2>
+  <div class="blog-header-row reveal" style="margin-bottom:3.5rem;">
+    <div class="section-header" style="margin-bottom:0;">
+      <div class="section-eyebrow">Get in Touch</div>
+      <h2 class="section-title">Let's <span class="italic">Connect</span></h2>
+    </div>
+    <a href="contact.html" class="blog-view-all">Full Contact Page <span class="arrow">→</span></a>
   </div>
   <div class="contact-layout">
     <div class="contact-info reveal">
@@ -860,7 +863,7 @@ footer { background: var(--surface2); border-top: 1px solid var(--border); paddi
       <p class="contact-text">Whether you need a software engineer, a quality assurance specialist, or a technical content partner — I'd love to hear about your project.</p>
       <div class="contact-details">
         <div class="contact-detail"><div class="contact-detail-icon">📍</div><div><div class="contact-detail-label">Location</div><div class="contact-detail-value">Chennai, Tamil Nadu</div></div></div>
-        <div class="contact-detail"><div class="contact-detail-icon">📬</div><div><div class="contact-detail-label">Email</div><div class="contact-detail-value">yuvarajpandian243@gmail.com</div></div></div>
+        <div class="contact-detail"><div class="contact-detail-icon">📬</div><div><div class="contact-detail-label">Email</div><div class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90e9e5e6f1e2f1fae0f1fef4f9f1fea2a4a3d0f7fdf1f9fcbef3fffd">[email&#160;protected]</a></div></div></div>
         <div class="contact-detail"><div class="contact-detail-icon">🕐</div><div><div class="contact-detail-label">Response Time</div><div class="contact-detail-value">Within 24 hours</div></div></div>
       </div>
     </div>
@@ -908,7 +911,7 @@ footer { background: var(--surface2); border-top: 1px solid var(--border); paddi
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const cursor = document.getElementById('cursor');
 const ring   = document.getElementById('cursorRing');
 if (window.matchMedia('(hover: hover)').matches) {
@@ -949,16 +952,66 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 });
 document.getElementById('submitBtn').addEventListener('click', () => {
   const firstName = document.getElementById('firstName').value.trim();
+  const lastName  = (document.querySelector('#contact input[placeholder="Last Name"]') || {value:''}).value.trim();
   const email     = document.getElementById('email').value.trim();
+  const subject   = (document.querySelector('#contact input[placeholder*="collaboration"]') || {value:''}).value.trim();
   const message   = document.getElementById('message').value.trim();
-  const btn = document.getElementById('submitBtn');
+  const btn       = document.getElementById('submitBtn');
+
+  /* ── Validation ── */
   if (!firstName || !email || !message) {
-    btn.textContent = 'Please fill required fields ✗'; btn.style.background = 'var(--accent2)';
-    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 2500);
+    btn.textContent = 'Please fill required fields ✗';
+    btn.style.background = 'var(--accent2)'; btn.style.color = 'white';
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 2500);
     return;
   }
-  btn.textContent = 'Message Sent! ✓'; btn.style.background = 'var(--accent3)';
-  setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; }, 3000);
+  if (!email.includes('@') || !email.includes('.')) {
+    btn.textContent = 'Invalid email ✗';
+    btn.style.background = 'var(--accent2)'; btn.style.color = 'white';
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 2500);
+    return;
+  }
+
+  /* ── Sending state ── */
+  btn.textContent = 'Sending…';
+  btn.style.background = 'var(--accent3)'; btn.style.color = 'var(--bg)';
+  btn.disabled = true;
+
+  /* ── Your Cloudflare Workers API ── */
+  fetch('https://yuvarajpandian-api.yuvarajpandian243.workers.dev/contact', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name:    firstName + (lastName ? ' ' + lastName : ''),
+      email:   email,
+      subject: subject || 'Portfolio Enquiry',
+      message: message,
+      source:  'index-page',
+      sent_at: new Date().toISOString()
+    })
+  })
+  .then(res => {
+    btn.disabled = false;
+    if (res.ok) {
+      btn.textContent = 'Message Sent! ✓';
+      btn.style.background = 'var(--accent1)'; btn.style.color = 'var(--bg)';
+      document.getElementById('firstName').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+      document.querySelector('#contact input[placeholder*="Last Name"]') && (document.querySelector('#contact input[placeholder*="Last Name"]').value = '');
+      document.querySelector('#contact input[placeholder*="collaboration"]') && (document.querySelector('#contact input[placeholder*="collaboration"]').value = '');
+      setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 4000);
+    } else {
+      return res.text().then(t => { throw new Error(t || 'Server error ' + res.status); });
+    }
+  })
+  .catch(err => {
+    btn.disabled = false;
+    btn.textContent = 'Failed — try again ✗';
+    btn.style.background = 'var(--accent2)'; btn.style.color = 'white';
+    console.error('Contact form error:', err.message);
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 3000);
+  });
 });
 </script>
 </body>

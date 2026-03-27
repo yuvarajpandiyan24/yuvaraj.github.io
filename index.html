@@ -950,68 +950,69 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
   });
 });
-document.getElementById('submitBtn').addEventListener('click', () => {
+document.getElementById('submitBtn').addEventListener('click', async () => {
   const firstName = document.getElementById('firstName').value.trim();
-  const lastName  = (document.querySelector('#contact input[placeholder="Last Name"]') || {value:''}).value.trim();
+  const lastName  = document.querySelector('#contact .form-row input:last-of-type')?.value.trim() || '';
   const email     = document.getElementById('email').value.trim();
-  const subject   = (document.querySelector('#contact input[placeholder*="collaboration"]') || {value:''}).value.trim();
+  const subject   = document.querySelector('#contact input[placeholder*="collaboration"], #contact input[placeholder*="Subject"]')?.value.trim() || 'Portfolio Enquiry';
   const message   = document.getElementById('message').value.trim();
   const btn       = document.getElementById('submitBtn');
 
-  /* ── Validation ── */
+  /* Validation */
   if (!firstName || !email || !message) {
-    btn.textContent = 'Please fill required fields ✗';
+    btn.textContent = 'Fill required fields ✗';
     btn.style.background = 'var(--accent2)'; btn.style.color = 'white';
     setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 2500);
     return;
   }
-  if (!email.includes('@') || !email.includes('.')) {
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     btn.textContent = 'Invalid email ✗';
     btn.style.background = 'var(--accent2)'; btn.style.color = 'white';
     setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 2500);
     return;
   }
 
-  /* ── Sending state ── */
+  /* Sending state */
   btn.textContent = 'Sending…';
   btn.style.background = 'var(--accent3)'; btn.style.color = 'var(--bg)';
   btn.disabled = true;
 
-  /* ── Your Cloudflare Workers API ── */
-  fetch('https://yuvarajpandian-api.yuvarajpandian243.workers.dev/contact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name:    firstName + (lastName ? ' ' + lastName : ''),
-      email:   email,
-      subject: subject || 'Portfolio Enquiry',
-      message: message,
-      source:  'index-page',
-      sent_at: new Date().toISOString()
-    })
-  })
-  .then(res => {
-    btn.disabled = false;
+  try {
+    const res = await fetch('https://yuvarajpandian-api.yuvarajpandian243.workers.dev/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:    (firstName + ' ' + lastName).trim(),
+        email:   email,
+        subject: subject,
+        message: message,
+        source:  'index-page'
+      })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
     if (res.ok) {
       btn.textContent = 'Message Sent! ✓';
       btn.style.background = 'var(--accent1)'; btn.style.color = 'var(--bg)';
       document.getElementById('firstName').value = '';
-      document.getElementById('email').value = '';
-      document.getElementById('message').value = '';
-      document.querySelector('#contact input[placeholder*="Last Name"]') && (document.querySelector('#contact input[placeholder*="Last Name"]').value = '');
-      document.querySelector('#contact input[placeholder*="collaboration"]') && (document.querySelector('#contact input[placeholder*="collaboration"]').value = '');
+      document.getElementById('email').value    = '';
+      document.getElementById('message').value  = '';
       setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 4000);
     } else {
-      return res.text().then(t => { throw new Error(t || 'Server error ' + res.status); });
+      console.error('[Contact] API error:', res.status, data);
+      btn.textContent = 'Error (' + res.status + ') ✗';
+      btn.style.background = 'var(--accent2)'; btn.style.color = 'white';
+      setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 3500);
     }
-  })
-  .catch(err => {
-    btn.disabled = false;
-    btn.textContent = 'Failed — try again ✗';
+  } catch (err) {
+    console.error('[Contact] Network error:', err);
+    btn.textContent = 'Network error ✗';
     btn.style.background = 'var(--accent2)'; btn.style.color = 'white';
-    console.error('Contact form error:', err.message);
-    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 3000);
-  });
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; }, 3500);
+  } finally {
+    btn.disabled = false;
+  }
 });
 </script>
 </body>

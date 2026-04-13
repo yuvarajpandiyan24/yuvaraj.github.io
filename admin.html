@@ -255,7 +255,7 @@ option{background:var(--surface2);}
     <div class="login-sub">Portfolio Admin · v2026</div>
     <label class="login-label" for="pwInput">Admin Password</label>
     <input type="password" class="login-input" id="pwInput" placeholder="Enter password" autocomplete="current-password">
-    <div class="login-err" id="loginErr">&#x2715; Incorrect password. Please try again.</div>
+    <div class="login-err" id="loginErr">✕ Incorrect password. Please try again.</div>
     <button class="login-btn" id="loginBtn">Sign In →</button>
   </div>
 </div>
@@ -733,26 +733,35 @@ document.getElementById('pwInput').addEventListener('keydown', e=>{ if(e.key==='
 document.getElementById('logoutBtn').addEventListener('click', logout);
 
 /* ════════════════════════════
-   APP INIT
+   APP INIT (FIXED)
 ════════════════════════════ */
 async function showApp(){
   document.getElementById('loginScreen').style.display='none';
   document.getElementById('appShell').classList.add('visible');
-  checkApiStatus();
-  loadStats();
-  loadDashboardMessages();
+  
+  // First load stats and dashboard data
+  await loadStats();
+  await loadDashboardMessages();
+  
+  // Then check API status (which will be ok if above succeeded)
+  await checkApiStatus();
 }
 
 async function checkApiStatus(){
-  const {ok} = await api('/admin/stats');
   const el = document.getElementById('apiStatus');
-  if(ok){
-    el.innerHTML='<span style="width:5px;height:5px;border-radius:50%;background:var(--accent1);display:inline-block;animation:pulse 2s ease-in-out infinite;flex-shrink:0;"></span><span>API Connected</span>';
-  } else {
+  try {
+    const {ok} = await api('/admin/stats');
+    if(ok){
+      el.innerHTML='<span style="width:5px;height:5px;border-radius:50%;background:var(--accent1);display:inline-block;animation:pulse 2s ease-in-out infinite;flex-shrink:0;"></span><span>API Connected</span>';
+    } else {
+      el.innerHTML='<span style="width:5px;height:5px;border-radius:50%;background:var(--accent2);display:inline-block;flex-shrink:0;"></span><span>API Error</span>';
+    }
+  } catch(e) {
     el.innerHTML='<span style="width:5px;height:5px;border-radius:50%;background:var(--accent2);display:inline-block;flex-shrink:0;"></span><span>API Error</span>';
   }
 }
 
+// Verify token on page load
 if(TOKEN){
   api('/admin/verify').then(({ok})=>{
     if(ok) showApp(); else { TOKEN=''; localStorage.removeItem('admin_token'); }
